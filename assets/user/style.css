@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+body {
+	font-family: 'Roboto' !important;
+}
+
+/* mod */
+
+.navbar a.navbar-brand {
+	font-weight: 700;
+	font-size: 32px;
+	color: #756fe6;
+}
+
+.navbar a.navbar-brand:hover {
+	color: #6962e5;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link {
+	font-weight: 500;
+}
+
+.navbar-light .navbar-nav a.nav-link:focus,
+.navbar-light .navbar-nav a.nav-link:hover {
+	color: #6962e5;
+}
+
+.navbar-light .navbar-nav .active a.nav-link {
+	color: #6962e5;
+}
+
+.jumbotron h1.display-4 {
+	color: #6962e5;
+	font-weight: 700;
+}
+
+.wrapper {
+	position: relative;
+	padding-bottom: 2rem;
+}
+
+/* sub-title */
+h2.title {
+	font-weight: 700;
+}
+
+h1.title {
+	font-weight: 700;
+}
+
+/* ---- */
+
+a.link {
+	text-decoration: none;
+	color: #171821;
+}
+
+a.link:hover {
+	text-decoration: none;
+	color: #6962e5;
+}
+
+.button {
+	display: inline-block;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	border-radius: .25rem;
+	text-decoration: none;
+}
+
+.btn-mod {
+	color: #fff;
+	background-color: #756fe6;
+	border-color: #756fe6;
+}
+
+.btn-mod:hover {
+	color: #fff;
+	background-color: #6962e5;
+	border-color: #6962e5;
+	text-decoration: none;
+}
+
+.category {
+	padding: 30px;
+	background-color: #fbf9ff;
+}
+
+.list-group {
+	padding: 0;
+}
+
+.list-group .list {
+	list-style: none;
+	padding: 15px 0 12px 0;
+	border-bottom: 1px solid #f0e9ff;
+}
+
+.list .link {
+	color: gray;
+}
+
+p {
+	color: gray;
+}
+
+.spacing-margin {
+	margin-bottom: 200px;
+}
+
+.icon {
+	width: 85px;
+}
+
+
+section.hero {
+	padding: 0 0;
+}
+
+section {
+	padding: 60px 0;
+}
+
+li.borderless {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+li.borderless p {
+	margin: 0;
+	padding: 0;
+}
+
+.search-input input {
+	width: 100%;
+	padding: 12px 16px;
+	font-size: 16px;
+	position: absolute;
+}
+
+#end {
+	position: relative;
+}
+
+
+
+/* ---- */
+
+/* sidebar maps */
+.search-box {
+	background-color: #756fe6;
+}
+
+/* end sidebar maps */
+
+/* card profile */
+div.card.profile-card {
+	position: relative;
+	margin-top: 20px;
+	box-shadow: 0 0 10px rgba(90, 90, 90, 0.3);
+
+}
+
+.card.profile-card .card-title {
+	color: #756fe6;
+}
+
+.card .card-img-container {
+	position: relative;
+	width: 91%;
+	margin: 0 auto;
+	top: -20px;
+	border-radius: 5px;
+}
+
+.card .card-img-container img {
+	border-radius: 7px;
+	box-shadow: 0 0 10px rgba(90, 90, 90, 0.5);
+}
+
+/* End: card profile */
+
+/* detail dokter */
+p.text-custom {
+	color: #756fe6;
+	font-weight: 500;
+}
+
+.tab-mod .nav-item .nav-link {
+	color: #171821;
+}
+
+.tab-mod .nav-item .nav-link:hover {
+	text-decoration: none;
+	color: #6962e5;
+}
+
+.tab-mod .nav-item .nav-link.active {
+	color: #6962e5;
+}
+
+/* End: detail dokter */
+
+/* Card Marker */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+
+h3 {
+	margin: 10px 0;
+}
+
+h6 {
+	margin: 5px 0;
+	text-transform: uppercase;
+}
+
+p {
+	font-size: 14px;
+	line-height: 21px;
+}
+
+.card-container {
+	background-color: #231E39;
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+	color: #B3B8CD;
+	padding-top: 30px;
+	position: relative;
+	width: 350px;
+	max-width: 100%;
+	text-align: center;
+}
+
+.card-container .pro {
+	color: #231E39;
+	background-color: #FEBB0B;
+	border-radius: 3px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 3px 7px;
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+.card-container .round {
+	border: 1px solid #03BFCB;
+	border-radius: 50%;
+	padding: 7px;
+}
+
+button.primary {
+	background-color: #03BFCB;
+	border: 1px solid #03BFCB;
+	border-radius: 3px;
+	color: #231E39;
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	padding: 10px 25px;
+}
+
+button.primary.ghost {
+	background-color: transparent;
+	color: #02899C;
+}
+
+.skills {
+	background-color: #1F1A36;
+	text-align: left;
+	padding: 15px;
+	margin-top: 30px;
+}
+
+.skills ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.skills ul li {
+	border: 1px solid #2D2747;
+	border-radius: 2px;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0 7px 7px 0;
+	padding: 7px;
+}
+
+footer {
+	background-color: #222;
+	color: #fff;
+	padding: 20px 0;
+	font-size: 14px;
+	bottom: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 999;
+}
+
+footer p {
+	margin: 5px 0;
+}
+
+footer i {
+	color: red;
+}
+
+footer a {
+	color: #3c97bf;
+	text-decoration: none;
+}
+
+/* End: Card Marker */
+
+/* Saran */
+div.card-body div.border-mod {
+	border-top: 1px dashed gray;
+}
+
+#scroll {
+	height: 500px;
+	padding: 12px;
+	overflow: auto;
+}
+
+
+
+/* End: Saran */
+
+
+
+
+/* desktop */
+@media only screen and (max-width: 768px) {
+	.search-box {
+		margin-top: 30px;
+	}
+}
