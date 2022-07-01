@@ -36,7 +36,7 @@ class admin extends CI_Model
 
     public function getDokterByName($name)
     {
-        return $this->db->query("SELECT spesialis.nama AS namaSpesialis, dokter.nama AS namaDokter, dokter.id AS idDokter,bpjs,dokter.foto,spesialis.id FROM dokter,spesialis WHERE dokter.id_spesialis = spesialis.id AND dokter.nama LIKE '%$name%'")->result();
+        return $this->db->query("SELECT * FROM kelompok_tani WHERE kelompok_tani.nama LIKE '%$name%'")->result();
     }
 
     public function getDokterDetailLokasi($id)
@@ -148,7 +148,7 @@ class admin extends CI_Model
 
     public function insertDokter($data)
     {
-        $this->db->insert('dokter', $data);
+        $this->db->insert('kelompok_tani', $data);
         $id = $this->db->insert_id();
         return $id;
     }

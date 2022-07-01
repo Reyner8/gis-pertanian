@@ -16,28 +16,28 @@
                         </div>
                         <div class="form-group">
                            <label for="alamat" class="col-form-label">Kelurahan</label>
-                           <select class="custom-select" name="kelurahan">
+                           <select class="custom-select" name="id_kelurahan">
                               <option value="" selected="selected">Select Kelurahan</option>
                               <?php foreach ($dataKelurahan as $kelurahan) : ?>
                                  <option value="<?= $kelurahan->idKelurahan ?>"><?= $kelurahan->namaKelurahan ?></option>
                               <?php endforeach; ?>
                            </select>
-                           <div class="error"><?= form_error('kelurahan') ?></div>
+                           <div class="error"><?= form_error('id_kelurahan') ?></div>
                         </div>
                         <div class="form-group">
                            <label for="longitude" class="col-form-label">longitude</label>
-                           <input class="form-control" id="longitude" name="longitude">
-                           <div class="error"><?= form_error('longitude') ?></div>
+                           <input class="form-control" id="longitude" name="lng">
+                           <div class="error"><?= form_error('lng') ?></div>
                         </div>
                         <div class="form-group">
                            <label for="latitude" class="col-form-label">latitude</label>
-                           <input class="form-control" id="latitude" name="latitude">
-                           <div class="error"><?= form_error('latitude') ?></div>
+                           <input class="form-control" id="latitude" name="lat">
+                           <div class="error"><?= form_error('lat') ?></div>
                         </div>
                         <div class="form-group">
                            <label for="judul" class="col-form-label">Icon</label>
                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="gambar" name="gambar">
+                              <input type="file" class="custom-file-input" id="gambar" name="image">
                               <label class="custom-file-label" for="gambar">Pilih Icon</label>
                            </div>
 
@@ -53,7 +53,7 @@
                   </div>
                </div>
             </div>
-            <?= $this->session->flashdata('err-dokter') ?>
+            <?= $this->session->flashdata('err-kelompok-tani') ?>
 
             <div class="col-md-8 mt-5">
                <div class="card">
@@ -72,14 +72,13 @@
                            </thead>
                            <tbody>
                               <?php $number = 1;
-                              foreach ($dataSpesialis as $spesialis) : ?>
+                              foreach ($dataKelompokTani as $kelompokTani) : ?>
                                  <tr>
                                     <th scope="row"><?= $number++ ?></th>
-                                    <td>Dokter <?= $spesialis->nama ?></td>
-                                    <td><img src="<?= base_url('assets/images/icon/icon-marker/' . $spesialis->icon)  ?>" alt=""></td>
+                                    <td><?= $kelompokTani->nama ?></td>
+                                    <td><img src="<?= base_url('assets/images/icon/icon-marker/' . $kelompokTani->icon)  ?>" alt="<?= $kelompokTani->icon  ?>"></td>
                                     <td>
-                                       <a href="<?= base_url('admin/spesialis/updateForm/' . $spesialis->id) ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                       <a href="<?= base_url('admin/spesialis/deleteSpesialis/' . $spesialis->id) ?>" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                                       <a href="<?= base_url('admin/kelompok_tani/detail/' . $kelompokTani->id) ?>" class="btn btn-secondary"><i class="fa fa-info"></i></a>
                                     </td>
                                  </tr>
                               <?php endforeach; ?>

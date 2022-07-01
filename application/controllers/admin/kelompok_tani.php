@@ -38,39 +38,44 @@ class kelompok_tani extends CI_Controller
       $this->load->view('admin/dokter', $data);
    }
 
-   public function addDokter()
+   public function addKelompokTani()
    {
-      $this->form_validation->set_rules('name', 'Nama', 'required');
-      $this->form_validation->set_rules('spesialis', 'Spesialis', 'callback_dropdownCheck');
-      $this->form_validation->set_rules('tlp', 'Telepon', 'required');
-      $this->form_validation->set_rules('bpjs', 'BPJS', 'callback_dropdownCheck');
-      $this->form_validation->set_rules('image', 'Image', 'callback_gambarCheck');
+      $this->form_validation->set_rules('nama', 'Nama', 'required');
+      $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+      $this->form_validation->set_rules('lng', 'Longitude', 'required');
+      $this->form_validation->set_rules('lat', 'Lattitude', 'required');
+      $this->form_validation->set_rules('image', 'Icon', 'callback_gambarCheck');
+      $this->form_validation->set_rules('id_kelurahan', 'Kelurahan', 'callback_dropdownCheck');
 
 
       if ($this->form_validation->run()) {
-         $name = $this->input->post('name');
-         $spesialis = $this->input->post('spesialis');
-         $bpjs = $this->input->post('bpjs');
-         $tlp = $this->input->post('tlp');
+         $nama = $this->input->post('nama');
+         $alamat = $this->input->post('spesialis');
+         $lng = $this->input->post('lng');
+         $lat = $this->input->post('lat');
+         $id_kelurahan = $this->input->post('id_Kelurahan');
          $image = $_FILES['image']['name'];
          $uploadImage = $this->__uploadImage($image);
-         $getDokter = $this->admin->getDokterByName($name);
-         if ($getDokter == '') {
+         $getKelompokTani = $this->admin->getKelompokTaniByName($nama);
+         var_dump($getKelompokTani);
+         die;
+         if ($getKelompokTani == '') {
             $data = array(
-               'nama' => $name,
-               'foto' => $uploadImage,
-               'bpjs' => $bpjs,
-               'telepon' => $tlp,
-               'id_spesialis' => $spesialis
+               'id_kelurahan' => $id_kelurahan,
+               'nama' => $nama,
+               'alamat' => $alamat,
+               'lng' => $lng,
+               'lat' => $lat,
+               'icon' => $uploadImage
             );
-            $this->admin->insertDokter($data);
-            redirect('admin/dokter');
+            $this->admin->insertKelompokTani($data);
+            redirect('admin/kelompok_tani');
          } else {
-            $this->session->set_flashdata('err-dokter', '<div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert"> Input Gagal, Dokter yang diinput sudah ada!!!</div>');
+            $this->session->set_flashdata('err-kelompokTani', '<div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert"> Input Gagal, Kelompok Tani yang diinput sudah ada!!</div>');
             $this->index();
          }
       } else {
-         $this->session->set_flashdata('err-dokter', '<div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert"> Input data gagal, Silahkan coba lagi !</div>');
+         $this->session->set_flashdata('err-kelompokTani', '<div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert"> Input data gagal, Silahkan coba lagi !</div>');
          $this->index();
       }
    }
