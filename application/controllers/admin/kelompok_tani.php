@@ -20,7 +20,8 @@ class kelompok_tani extends CI_Controller
          'title' => 'Kelompok Tani',
          'name' => $this->session->userdata('username'),
          'dataKelompokTani' => $this->admin->getKelompokTani(),
-         'dataKelurahan' => $this->admin->getKelurahan()
+         'dataKelurahan' => $this->admin->getKelurahan(),
+         'isEdit' => false
       );
       $this->load->view('admin/kelompok_tani', $data);
    }
@@ -47,18 +48,16 @@ class kelompok_tani extends CI_Controller
       $this->form_validation->set_rules('image', 'Icon', 'callback_gambarCheck');
       $this->form_validation->set_rules('id_kelurahan', 'Kelurahan', 'callback_dropdownCheck');
 
-
       if ($this->form_validation->run()) {
          $nama = $this->input->post('nama');
-         $alamat = $this->input->post('spesialis');
+         $alamat = $this->input->post('alamat');
          $lng = $this->input->post('lng');
          $lat = $this->input->post('lat');
-         $id_kelurahan = $this->input->post('id_Kelurahan');
+         $id_kelurahan = $this->input->post('id_kelurahan');
          $image = $_FILES['image']['name'];
-         $uploadImage = $this->__uploadImage($image);
+         $uploadImage = $this->__uploadImage($image, './assets/images/icon/icon-marker/');
+
          $getKelompokTani = $this->admin->getKelompokTaniByName($nama);
-         var_dump($getKelompokTani);
-         die;
          if ($getKelompokTani == '') {
             $data = array(
                'id_kelurahan' => $id_kelurahan,
@@ -80,6 +79,56 @@ class kelompok_tani extends CI_Controller
       }
    }
 
+   public function editDokter($id)
+   {
+      $data = array(
+         'title' => 'Kelompok Tani',
+         'name' => $this->session->userdata('username'),
+         'dataKelompokTani' => $this->admin->getKelompokTani(),
+         'editData' => $this->admin->getKelompokTaniById($id),
+         'dataKelurahan' => $this->admin->getKelurahan(),
+         'isEdit' => true
+      );
+      $this->load->view('admin/kelompok_tani', $data);
+   }
+
+   public function updateKelompokTani($idKelompokTani)
+   {
+      $nama = $this->input->post('nama');
+      $alamat = $this->input->post('alamat');
+      $lng = $this->input->post('lng');
+      $lat = $this->input->post('lat');
+      $id_kelurahan = $this->input->post('id_kelurahan');
+      $image = $_FILES['image']['name'];
+      $uploadImage = '';
+      if ($image == '') {
+         $uploadImage = $this->admin->getKelompokTaniById($idKelompokTani)->foto;
+      } else {
+         $uploadImage = $this->__uploadImage($image, './assets/images/icon/icon-marker/');
+      }
+      $data = array(
+         'id_kelurahan' => $id_kelurahan,
+         'nama' => $nama,
+         'alamat' => $alamat,
+         'lng' => $lng,
+         'lat' => $lat,
+         'icon' => $uploadImage
+      );
+      $this->admin->updateDokter($idKelompokTani, $data);
+      redirect('admin/kelompok_tani');
+   }
+
+   public function detailKelompokTani($idKelompokTani)
+   {
+      $data = array(
+         'title' => 'Detail Kelompok Tani',
+         'name' => $this->session->userdata('username'),
+         'kelompokTani' => $this->admin->getKelompokTaniById($idKelompokTani),
+         'galeri' => $this->admin->getGaleriById($idKelompokTani),
+      );
+      $this->load->view('admin/detailKelompok_tani', $data);
+   }
+
    public function addPraktik($idDokter)
    {
       $this->form_validation->set_rules('lokasi', 'Lokasi', 'callback_dropdownCheck');
@@ -98,41 +147,9 @@ class kelompok_tani extends CI_Controller
       }
    }
 
-   public function editDokter($id)
-   {
-      $data = array(
-         'title' => 'DOKTER',
-         'name' => $this->session->userdata('username'),
-         'dataDokter' => $this->admin->getDokter_id($id),
-         'dataSpesialis' => $this->admin->getSpesialis(),
-         'dataLokasi' => $this->admin->getLokasi(),
-      );
-      $this->load->view('admin/updateDokter', $data);
-   }
 
-   public function updateDokter($idDokter)
-   {
-      $name = $this->input->post('name');
-      $spesialis = $this->input->post('spesialis');
-      $bpjs = $this->input->post('bpjs');
-      $tlp = $this->input->post('telepon');
-      $image = $_FILES['image']['name'];
-      $uploadImage = '';
-      if ($image == '') {
-         $uploadImage = $this->admin->getDokter_id($idDokter)->foto;
-      } else {
-         $uploadImage = $this->__uploadImage($image);
-      }
-      $data = array(
-         'nama' => $name,
-         'foto' => $uploadImage,
-         'bpjs' => $bpjs,
-         'telepon' => $tlp,
-         'id_spesialis' => $spesialis
-      );
-      $this->admin->updateDokter($idDokter, $data);
-      redirect('admin/dokter');
-   }
+
+
 
    public function dropdownCheck($str)
    {
@@ -159,7 +176,7 @@ class kelompok_tani extends CI_Controller
       }
    }
 
-   private function __uploadImage($gambar)
+   private function __uploadImage($gambar, $directory)
    {
       // image
       $name = $gambar;
@@ -170,23 +187,12 @@ class kelompok_tani extends CI_Controller
       $tmp_file = $_FILES['image']['tmp_name'];
       // -----
       if (in_array($explode[1], $allowedFileType) === true) {
-         move_uploaded_file($tmp_file, './assets/images/dokter/' . $newName);
+         move_uploaded_file($tmp_file, $directory . $newName);
          return $newName;
       }
    }
 
-   public function detailDokter($idDokter)
-   {
-      $data = array(
-         'title' => 'Dokter',
-         'name' => $this->session->userdata('username'),
-         'dokter' => $this->admin->getDetailDokterById($idDokter),
-         'jadwal' => $this->admin->getDetailJadwal($idDokter),
-         'lokasi' => $this->admin->getDetailLokasi($idDokter),
-         'dropdown' => $this->admin->getLokasi()
-      );
-      $this->load->view('admin/detailDokter', $data);
-   }
+
 
    public function deleteDokter($id)
    {

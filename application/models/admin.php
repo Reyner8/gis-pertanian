@@ -17,16 +17,14 @@ class admin extends CI_Model
         return $this->db->query("SELECT spesialis.nama AS namaSpesialis, dokter.nama AS namaDokter, dokter.id AS idDokter, dokter.id_spesialis,telepon,bpjs,dokter.foto,spesialis.id FROM dokter,spesialis WHERE dokter.id_spesialis = spesialis.id AND dokter.id = '$id'")->row();
     }
 
-    public function getDokterById($id)
+    public function getKelompokTaniById($id)
     {
         return $this->db->query("SELECT 
-        dokter.id AS idDokter, dokter.nama AS namaDokter, dokter.bpjs,dokter.foto,dokter.id_spesialis,dokter.telepon,
-        praktik.id AS idPraktik,praktik.id_dokter,praktik.id_lokasi, 
-        lokasi.id AS idLokasi, lokasi.latitude,lokasi.longitude,lokasi.nama_tempat, lokasi.alamat, 
-        spesialis.id AS idSpesialis, spesialis.nama AS namaSpesialis
-        FROM praktik,dokter,lokasi,spesialis
-        WHERE dokter.id = praktik.id_dokter AND 
-        lokasi.id = praktik.id_lokasi AND dokter.id_spesialis = spesialis.id AND dokter.id = $id")->result();
+        kelompok_tani.*, kelurahan.nama AS namaKelurahan, kecamatan.nama AS namaKecamatan
+        FROM kelompok_tani, kecamatan, kelurahan
+        WHERE kelompok_tani.id_kelurahan = kelurahan.id AND 
+        kelurahan.id_kecamatan = kecamatan.id AND
+        kelompok_tani.id = $id")->row();
     }
 
     public function getDokterByNameLike($name)
@@ -102,10 +100,13 @@ class admin extends CI_Model
 
     public function getKelompokTani()
     {
-        return $this->db->query("SELECT * FROM kelompok_tani ")->result();
+        return $this->db->query("SELECT kelompok_tani.*, kelurahan.nama AS namaKelurahan, kecamatan.nama AS namaKecamatan FROM kelompok_tani, kecamatan, kelurahan WHERE kelompok_tani.id_kelurahan =  kelurahan.id AND kecamatan.id = kelurahan.id_kecamatan")->result();
     }
 
-
+    public function getKelompokTaniByName($name)
+    {
+        return $this->db->query("SELECT * FROM kelompok_tani WHERE kelompok_tani.nama = '$name'")->row();
+    }
 
     public function getKecamatan()
     {
@@ -122,9 +123,9 @@ class admin extends CI_Model
         return $this->db->query("SELECT * FROM kelurahan")->result();
     }
 
-    public function getGaleri()
+    public function getGaleriById($idKelompokTani)
     {
-        return $this->db->query("SELECT galeri.* , lokasi.nama_tempat FROM galeri,lokasi WHERE lokasi.id = galeri.id_lokasi")->result();
+        return $this->db->query("SELECT * FROM galeri WHERE galeri.id_kelompok = '$idKelompokTani'")->result();
     }
 
     public function getSaran()
@@ -139,6 +140,11 @@ class admin extends CI_Model
         } else {
             $this->db->update('praktik', $data, array('id' => $id));
         }
+    }
+
+    public function insertKelompokTani($data)
+    {
+        $this->db->insert('kelompok_tani', $data);
     }
 
     public function insertBerita($data)
