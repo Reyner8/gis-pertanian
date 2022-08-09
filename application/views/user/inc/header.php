@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="<?= base_url('assets/font-awesome.min.css'); ?>">
 <!--  -->
 
+<link rel="stylesheet" href="<?= base_url('assets/user/select2.min.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/user/style.css') ?>">
 
 <body>
@@ -32,9 +33,6 @@
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="<?= base_url('artikel') ?>">Berita & Tips</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="<?= base_url('dokter') ?>">Dokter</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="<?= base_url('lokasi') ?>">Lokasi</a>

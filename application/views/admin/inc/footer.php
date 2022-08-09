@@ -1,6 +1,6 @@
 <footer>
     <div class="footer-area">
-        <p>Geographic Information System for Doctor Location Services</p>
+        <p>Geographic Information System</p>
     </div>
 </footer>
 <!-- footer area end-->
@@ -16,7 +16,6 @@
 <script src="<?= base_url('assets/js/jquery.slimscroll.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/jquery.slicknav.min.js') ?>"></script>
 
-orldLow.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>

@@ -48,7 +48,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="index.html" class="text-logo">GIS</a>
+                            <a href="index.html" class="text-logo">SIG</a>
                         </div>
                     </div>
                     <!-- profile info & task notification -->
@@ -82,23 +82,20 @@
                                     <li>
                                         <a href="<?= base_url('admin/beranda') ?>"><i class="fa fa-dashboard"></i><span>Beranda</span></a>
                                     </li>
-                                    <li>
-                                        <a href="<?= base_url('admin/berita') ?>"><i class="fa fa-newspaper-o"></i><span>Berita</span></a>
-                                    </li>
+
                                     <li>
                                         <a href="<?= base_url('admin/kelompok_tani') ?>"><i class="fa fa-user-md"></i><span>Kelompok Tani</span></a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)"><i class="ti-pie-chart"></i><span>Data</span></a>
                                         <ul class="submenu">
-                                            <li><a href="<?= base_url('admin/spesialis') ?>">Spesialis</a></li>
-                                            <li><a href="<?= base_url('admin/lokasi') ?>">Lokasi</a></li>
-                                            <li><a href="<?= base_url('admin/galeri') ?>">Galeri</a></li>
-                                            <li><a href="<?= base_url('admin/jadwal') ?>">Jadwal</a></li>
                                             <li><a href="<?= base_url('admin/kecamatan') ?>">Kecamatan</a></li>
                                             <li><a href="<?= base_url('admin/kelurahan') ?>">Kelurahan</a></li>
                                             <li><a href="<?= base_url('admin/saran') ?>">Kritik & Saran</a></li>
                                         </ul>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('admin/berita') ?>"><i class="fa fa-newspaper-o"></i><span>Berita</span></a>
                                     </li>
                                 </ul>
                             </nav>

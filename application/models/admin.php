@@ -7,16 +7,6 @@ class admin extends CI_Model
         return $this->db->query("SELECT * FROM admin WHERE email = '$email'")->result();
     }
 
-    public function getDokter()
-    {
-        return $this->db->query("SELECT spesialis.nama AS namaSpesialis, dokter.nama AS namaDokter, dokter.id AS idDokter,bpjs,dokter.foto,spesialis.id FROM dokter,spesialis WHERE dokter.id_spesialis = spesialis.id")->result();
-    }
-
-    public function getDokter_id($id)
-    {
-        return $this->db->query("SELECT spesialis.nama AS namaSpesialis, dokter.nama AS namaDokter, dokter.id AS idDokter, dokter.id_spesialis,telepon,bpjs,dokter.foto,spesialis.id FROM dokter,spesialis WHERE dokter.id_spesialis = spesialis.id AND dokter.id = '$id'")->row();
-    }
-
     public function getKelompokTaniById($id)
     {
         return $this->db->query("SELECT 
@@ -25,6 +15,16 @@ class admin extends CI_Model
         WHERE kelompok_tani.id_kelurahan = kelurahan.id AND 
         kelurahan.id_kecamatan = kecamatan.id AND
         kelompok_tani.id = $id")->row();
+    }
+
+    public function getKelompokTaniByIdAnggota($id)
+    {
+        return $this->db->query("SELECT * FROM anggota WHERE id = '$id'")->row();
+    }
+
+    public function getKelompokTaniByGaleri($id)
+    {
+        return $this->db->query("SELECT * FROM galeri WHERE id = '$id'")->row();
     }
 
     public function getDokterByNameLike($name)
@@ -128,18 +128,38 @@ class admin extends CI_Model
         return $this->db->query("SELECT * FROM galeri WHERE galeri.id_kelompok = '$idKelompokTani'")->result();
     }
 
+    public function getAnggotaByIdKelompok($id)
+    {
+        return $this->db->query("SELECT * FROM anggota WHERE anggota.id_kelompok = '$id'")->result();
+    }
+
+    public function getAnggotaById($id)
+    {
+        return $this->db->query("SELECT * FROM anggota WHERE anggota.id = '$id'")->result();
+    }
+
+    public function getAnggotaByIdRow($id)
+    {
+        return $this->db->query("SELECT * FROM anggota WHERE anggota.id = '$id'")->row();
+    }
+    public function getHasilByIdKelompok($id)
+    {
+        return $this->db->query("SELECT * FROM hasil_panen WHERE hasil_panen.id_kelompok = '$id'")->result();
+    }
+
+    public function getHasilById($id)
+    {
+        return $this->db->query("SELECT * FROM hasil_panen WHERE hasil_panen.id = '$id'")->result();
+    }
+
+    public function getHasilByIdRow($id)
+    {
+        return $this->db->query("SELECT * FROM hasil_panen WHERE hasil_panen.id = '$id'")->row();
+    }
+
     public function getSaran()
     {
         return $this->db->query("SELECT * FROM saran")->result();
-    }
-
-    public function insertJadwal($id, $data)
-    {
-        if ($id == '') {
-            $this->db->insert('praktik', $data);
-        } else {
-            $this->db->update('praktik', $data, array('id' => $id));
-        }
     }
 
     public function insertKelompokTani($data)
@@ -152,29 +172,14 @@ class admin extends CI_Model
         $this->db->insert('berita', $data);
     }
 
-    public function insertDokter($data)
+    public function insertAnggota($data)
     {
-        $this->db->insert('kelompok_tani', $data);
-        $id = $this->db->insert_id();
-        return $id;
+        $this->db->insert('anggota', $data);
     }
 
-    public function insertDokterLoc($data)
+    public function insertHasil($data)
     {
-        $this->db->insert('praktik', $data);
-        $id = $this->db->insert_id();
-        return $id;
-    }
-
-    public function insertLokasi($data)
-    {
-        $this->db->insert('lokasi', $data);
-        return $this->db->insert_id();
-    }
-
-    public function insertSpesialis($data)
-    {
-        $this->db->insert('spesialis', $data);
+        $this->db->insert('hasil_panen', $data);
     }
 
     public function insertKecamatan($data)
@@ -192,29 +197,23 @@ class admin extends CI_Model
         $this->db->insert('galeri', $data);
     }
 
-    public function insertPraktik($data)
+    public function updateKelompokTani($id, $data)
     {
-        $this->db->insert('praktik', $data);
+        $this->db->update('kelompok_tani', $data, array('id' => $id));
     }
 
-    public function updateDokter($id, $data)
+    public function updateAnggota($id, $data)
     {
-        $this->db->update('dokter', $data, array('id' => $id));
+        $this->db->update('anggota', $data, array('id' => $id));
     }
-
-    public function updateSpesialis($id, $data)
+    public function updateHasil($id, $data)
     {
-        $this->db->update('spesialis', $data, array('id' => $id));
+        $this->db->update('hasil_panen', $data, array('id' => $id));
     }
 
     public function updateBerita($id, $data)
     {
         $this->db->update('berita', $data, array('id' => $id));
-    }
-
-    public function updateLokasi($id, $data)
-    {
-        $this->db->update('lokasi', $data, array('id' => $id));
     }
 
     public function updateKecamatan($id, $data)
@@ -227,51 +226,9 @@ class admin extends CI_Model
         $this->db->update('kelurahan', $data, array('id' => $id));
     }
 
-    public function deleteSpesialis($id)
-    {
-        $this->db->delete('spesialis', array('id' => $id));
-    }
-
-    public function deleteDokter($id)
-    {
-        $this->db->delete('dokter', array('id' => $id));
-        $this->db->delete('praktik', array('id_dokter' => $id));
-    }
-
     public function deleteBerita($id)
     {
         $this->db->delete('berita', array('id' => $id));
-    }
-
-    public function deleteLokasi($id)
-    {
-        $this->db->delete('lokasi', array('id' => $id));
-    }
-
-    public function deleteLokasiPraktik($idLokasi, $idDokter)
-    {
-        $this->db->query("DELETE FROM praktik WHERE id_dokter = '$idDokter' AND id_lokasi = '$idLokasi'");
-    }
-
-    public function deleteJadwal($id)
-    {
-        // get id dokter & lokasi
-        $getIds =  $this->db->query("SELECT * FROM praktik WHERE id = '$id'")->result()[0];
-        $idDokter = $getIds->id_dokter;
-        $idLokasi = $getIds->id_lokasi;
-
-        // check
-        $getData = $this->db->query("SELECT * FROM praktik WHERE id_dokter = '$idDokter' AND id_lokasi = '$idLokasi'")->result();
-        if (count($getData) > 1) {
-            $this->db->delete('praktik', array('id' => $id));
-        } else {
-            $data = array(
-                'hari' => null,
-                'jam_buka' => null,
-                'jam_tutup' => null
-            );
-            $this->db->update('praktik', $data, array('id' => $id));
-        }
     }
 
     public function deleteKecamatan($id)
@@ -287,6 +244,20 @@ class admin extends CI_Model
     public function deleteGaleri($id)
     {
         $this->db->delete('galeri', array('id' => $id));
+    }
+
+    public function deleteKelompokTani($id)
+    {
+        $this->db->delete('kelompok_tani', array('id' => $id));
+    }
+
+    public function deleteAnggota($id)
+    {
+        $this->db->delete('anggota', array('id' => $id));
+    }
+    public function deleteHasil($id)
+    {
+        $this->db->delete('hasil_panen', array('id' => $id));
     }
 
     public function deleteSaran($id)

@@ -79,7 +79,7 @@ class kelompok_tani extends CI_Controller
       }
    }
 
-   public function editDokter($id)
+   public function editKelompokTani($id)
    {
       $data = array(
          'title' => 'Kelompok Tani',
@@ -102,7 +102,7 @@ class kelompok_tani extends CI_Controller
       $image = $_FILES['image']['name'];
       $uploadImage = '';
       if ($image == '') {
-         $uploadImage = $this->admin->getKelompokTaniById($idKelompokTani)->foto;
+         $uploadImage = $this->admin->getKelompokTaniById($idKelompokTani)->icon;
       } else {
          $uploadImage = $this->__uploadImage($image, './assets/images/icon/icon-marker/');
       }
@@ -114,40 +114,23 @@ class kelompok_tani extends CI_Controller
          'lat' => $lat,
          'icon' => $uploadImage
       );
-      $this->admin->updateDokter($idKelompokTani, $data);
+      $this->admin->updateKelompokTani($idKelompokTani, $data);
       redirect('admin/kelompok_tani');
    }
 
-   public function detailKelompokTani($idKelompokTani)
+   public function deleteKelompokTani($id)
    {
-      $data = array(
-         'title' => 'Detail Kelompok Tani',
-         'name' => $this->session->userdata('username'),
-         'kelompokTani' => $this->admin->getKelompokTaniById($idKelompokTani),
-         'galeri' => $this->admin->getGaleriById($idKelompokTani),
-      );
-      $this->load->view('admin/detailKelompok_tani', $data);
-   }
+      $galeri = $this->admin->getGaleriByIdKelompok($id);
 
-   public function addPraktik($idDokter)
-   {
-      $this->form_validation->set_rules('lokasi', 'Lokasi', 'callback_dropdownCheck');
-
-      if ($this->form_validation->run()) {
-         $lokasi = $this->input->post('lokasi');
-         $data = array(
-            'id_dokter' => $idDokter,
-            'id_lokasi' => $lokasi,
-         );
-         $this->admin->insertPraktik($data);
-         redirect('admin/dokter');
-      } else {
-         $this->session->set_flashdata('err-dokter', '<div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert"> Input data gagal, Silahkan coba lagi !</div>');
-         $this->index();
+      if ($galeri[0]) {
+         foreach ($galeri as $g) {
+            unlink("./assets/images/galeri/" . $g->nama);
+            $this->admin->deleteGaleri($g->id);
+         }
       }
+      $this->admin->deleteKelompokTani($id);
+      redirect('admin/kelompok_tani');
    }
-
-
 
 
 
@@ -190,29 +173,5 @@ class kelompok_tani extends CI_Controller
          move_uploaded_file($tmp_file, $directory . $newName);
          return $newName;
       }
-   }
-
-
-
-   public function deleteDokter($id)
-   {
-      $image = $this->admin->getDokterById($id)[0]->foto;
-      unlink("./assets/images/dokter/" . $image);
-      $this->admin->deleteDokter($id);
-      redirect('admin/dokter');
-   }
-
-   public function deleteJadwal($id)
-   {
-      $this->admin->deleteJadwal($id);
-      redirect('admin/dokter');
-   }
-
-   public function deletePraktik()
-   {
-      $idLokasi =  $this->uri->segment(4);
-      $idDokter =  $this->uri->segment(5);
-      $this->admin->deleteLokasiPraktik($idLokasi, $idDokter);
-      redirect('admin/dokter');
    }
 }

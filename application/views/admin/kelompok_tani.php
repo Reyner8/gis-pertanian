@@ -58,7 +58,7 @@
                         </form>
                      <?php else : ?>
                         <h4 class="header-title">Edit Data</h4>
-                        <form action="<?= base_url('admin/kelompok_tani/EditKelompokTani') ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= base_url('admin/kelompok_tani/updateKelompokTani/' . $editData->id) ?>" method="POST" enctype="multipart/form-data">
                            <div class="form-group">
                               <label for="nama" class="col-form-label">nama</label>
                               <input class="form-control" id="nama" name="nama" value="<?= $editData->nama ?>">
@@ -72,9 +72,8 @@
                            <div class="form-group">
                               <label for="alamat" class="col-form-label">Kelurahan</label>
                               <select class="custom-select" name="id_kelurahan">
-                                 <option value="" selected="selected">Select Kelurahan</option>
                                  <?php foreach ($dataKelurahan as $kelurahan) : ?>
-                                    <?php if ($kelurahan->id == $editData->id_kelurahan) : ?>
+                                    <?php if ($kelurahan->idKelurahan == $editData->id_kelurahan) : ?>
                                        <option selected value="<?= $kelurahan->idKelurahan ?>"><?= $kelurahan->namaKelurahan ?></option>
                                     <?php else : ?>
                                        <option value="<?= $kelurahan->idKelurahan ?>"><?= $kelurahan->namaKelurahan ?></option>
@@ -107,7 +106,7 @@
                            </div>
                            <p>Kosongkan jika tidak mengupdate gambar</p>
                            <div class="form-group">
-                              <button type="submit" class="btn btn-primary">Add Data</button>
+                              <button type="submit" class="btn btn-primary">Submit Data</button>
                            </div>
                         </form>
                      <?php endif; ?>
@@ -146,8 +145,9 @@
                                     <td><?= $kelompokTani->lat . '/' . $kelompokTani->lng ?></td>
                                     <td><img width="50" src="<?= base_url('assets/images/icon/icon-marker/' . $kelompokTani->icon)  ?>" alt="<?= $kelompokTani->icon  ?>"></td>
                                     <td>
-                                       <a href="<?= base_url('admin/kelompok_tani/detailKelompokTani/' . $kelompokTani->id) ?>" class="btn btn-secondary"><i class="fa fa-info"></i></a>
+                                       <a href="<?= base_url('admin/detail_kelompok/galeri/' . $kelompokTani->id) ?>" class="btn btn-secondary"><i class="fa fa-info"></i></a>
                                        <a href="<?= base_url('admin/kelompok_tani/editKelompokTani/' . $kelompokTani->id) ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                       <a href="<?= base_url('admin/kelompok_tani/deleteKelompokTani/' . $kelompokTani->id) ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                  </tr>
                               <?php endforeach; ?>

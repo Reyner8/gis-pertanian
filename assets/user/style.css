@@ -9,11 +9,11 @@ body {
 .navbar a.navbar-brand {
 	font-weight: 700;
 	font-size: 32px;
-	color: #756fe6;
+	color: #9fe66f;
 }
 
 .navbar a.navbar-brand:hover {
-	color: #6962e5;
+	color: #9fe66f;
 }
 
 .navbar-light .navbar-nav .nav-item .nav-link {
@@ -22,15 +22,15 @@ body {
 
 .navbar-light .navbar-nav a.nav-link:focus,
 .navbar-light .navbar-nav a.nav-link:hover {
-	color: #6962e5;
+	color: #9fe66f;
 }
 
 .navbar-light .navbar-nav .active a.nav-link {
-	color: #6962e5;
+	color: #9fe66f;
 }
 
 .jumbotron h1.display-4 {
-	color: #6962e5;
+	color: #9fe66f;
 	font-weight: 700;
 }
 
@@ -57,7 +57,7 @@ a.link {
 
 a.link:hover {
 	text-decoration: none;
-	color: #6962e5;
+	color: #9fe66f;
 }
 
 .button {
@@ -70,14 +70,14 @@ a.link:hover {
 
 .btn-mod {
 	color: #fff;
-	background-color: #756fe6;
-	border-color: #756fe6;
+	background-color: #84d150;
+	border-color: #84d150;
 }
 
 .btn-mod:hover {
 	color: #fff;
-	background-color: #6962e5;
-	border-color: #6962e5;
+	background-color: #9fe66f;
+	border-color: #9fe66f;
 	text-decoration: none;
 }
 
@@ -149,7 +149,7 @@ li.borderless p {
 
 /* sidebar maps */
 .search-box {
-	background-color: #756fe6;
+	background-color: #9fe66f;
 }
 
 /* end sidebar maps */
@@ -183,7 +183,7 @@ div.card.profile-card {
 
 /* detail dokter */
 p.text-custom {
-	color: #756fe6;
+	color: #8acf5c;
 	font-weight: 500;
 }
 
@@ -193,11 +193,11 @@ p.text-custom {
 
 .tab-mod .nav-item .nav-link:hover {
 	text-decoration: none;
-	color: #6962e5;
+	color: #9fe66f;
 }
 
 .tab-mod .nav-item .nav-link.active {
-	color: #6962e5;
+	color: #9fe66f;
 }
 
 /* End: detail dokter */

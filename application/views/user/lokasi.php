@@ -5,7 +5,7 @@
          <div class="row">
             <div class="col-md-8">
                <p><b> Note:</b>
-                  <?php foreach ($dataSpesialis as $data) : ?>
+                  <?php foreach ($lokasiKelompokTani as $data) : ?>
                      <?= $data->nama ?><img src="<?= base_url('assets/images/icon/icon-marker/' . $data->icon)  ?>" width="20">,
                   <?php endforeach; ?>
                </p>
@@ -16,16 +16,6 @@
 
             <div class="col-md-4">
                <div class="row">
-                  <div id="spesialis" class="col-md-12">
-                     <div class="form-group">
-                        <select id="kategori" name="kategori" class="custom-select">
-                           <option value="0" selected>-- Spesialis --</option>
-                           <?php foreach ($dataSpesialis as $spesialis) : ?>
-                              <option value="<?= $spesialis->id ?>"><img src="<?= $spesialis->icon ?>" width="50px"> Dokter <?= $spesialis->nama ?></option>
-                           <?php endforeach; ?>
-                        </select>
-                     </div>
-                  </div>
                   <div id="kelurahan" class="col-md-12">
                      <div class="form-group">
                         <select id="kategori" name="kategori" class="custom-select">
@@ -47,10 +37,10 @@
                         <div class="select-box">
                            <div class="form-group">
                               <select name="end" id='end' class="custom-select">
-                                 <option disabled selected>Dokter Tujuan Anda</option>
+                                 <option disabled selected>Kelompok Tani Tujuan Anda</option>
                                  <?php $i = 0;
-                                 foreach ($lokasiDokter as $dokter) : ?>
-                                    <option value="<?= $dokter->latitude . ',' . $dokter->longitude ?>"><?= $dokter->namaDokter . ' (' . $dokter->nama_tempat . ')' ?></option>
+                                 foreach ($lokasiKelompokTani as $kelompokTani) : ?>
+                                    <option value="<?= $kelompokTani->lat . ',' . $kelompokTani->lng ?>"><?= $kelompokTani->nama  ?></option>
                                  <?php endforeach; ?>
                               </select>
                            </div>

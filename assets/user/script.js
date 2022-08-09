@@ -53,11 +53,11 @@ const contentBox = document.getElementById('content');
 console.log('seeee');
 searchInput.addEventListener('input', function(e) {
   console.log(e.target.value)
-  // let dataDokter = await getDokter(`${baseUrl}dokter/searchData/${e.value}`);
+  let dataDokter = await getDokter(`${baseUrl}dokter/searchData/${e.value}`);
 
-  // dataDokter.forEach(data => {
-  //   contentItem(data);
-  // });
+  dataDokter.forEach(data => {
+    contentItem(data);
+  });
 });
 
 function getDokter(url = '') {
