@@ -16,4 +16,8 @@ class beranda extends CI_Controller
       );
       $this->load->view('user/beranda', $data);
    }
+   public function index2()
+   {
+      return $this->load->view('user/beranda');
+   }
 }

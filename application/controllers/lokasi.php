@@ -15,7 +15,6 @@ class lokasi extends CI_Controller
       $data = array(
          'title' => 'Lokasi',
          'dataKelurahan' => $this->user->getKelurahan(),
-         'lokasiKelompokTani' => $this->user->getLokasi()
       );
       $this->load->view('user/lokasi', $data);
    }
@@ -23,17 +22,27 @@ class lokasi extends CI_Controller
    public function lokasiJSON()
    {
       $data = $this->user->getLokasi();
+
       echo json_encode($data);
    }
 
-   public function detailKelompokTani($id)
+   public function detailKelurahan($id)
    {
       $data = array(
          'title' => 'Detail',
-         'kelompokTani' => $this->user->getKelompokTaniById($id),
-         'galeri' => $this->user->getGaleriByIdKelompok($id),
-         'hasil' => $this->user->getHasilByIdKelompok($id),
+         'kelompokTani' => $this->user->getKelompokTaniByIdKelurahan($id),
+         'kelurahan' => $this->user->getKelurahanById($id),
       );
       $this->load->view('user/detailKelompokTani', $data);
+   }
+
+   public function hasilPanen($id)
+   {
+      $data = array(
+         'title' => 'Hasil',
+         'kelompokTani' => $this->user->getKelompokTaniById($id),
+         'hasil' => $this->user->getHasilByIdKelompok($id),
+      );
+      $this->load->view('user/hasil_panen', $data);
    }
 }
