@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"> -->
 <link rel="stylesheet" href="<?= base_url('assets/font-awesome.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
 <!--  -->
 
 <link rel="stylesheet" href="<?= base_url('assets/user/select2.min.css') ?>">
@@ -22,7 +24,7 @@
       <!-- navbar -->
       <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
          <div class="container mt-2">
-            <a class="navbar-brand" href="<?= base_url('beranda') ?>">SIG</a>
+            <a class="navbar-brand" href="<?= base_url('beranda') ?>">DINAS PERTANIAN TTU</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,13 +34,13 @@
                      <a class="nav-link" href="<?= base_url('beranda') ?>">Home</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="<?= base_url('artikel') ?>">Berita & Tips</a>
+                     <a class="nav-link" href="<?= base_url('about') ?>">About</a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="<?= base_url('hasil_pertanian') ?>" class="nav-link">Hasil</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="<?= base_url('lokasi') ?>">Lokasi</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="btn btn-mod rounded-pill" href="<?= base_url('saran') ?>"> Saran </a>
                   </li>
                </ul>
             </div>

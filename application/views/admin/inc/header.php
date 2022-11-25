@@ -48,7 +48,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="index.html" class="text-logo">SIG</a>
+                            <a href="index.html" class="text-logo">DINAS PERTANIAN TTU</a>
                         </div>
                     </div>
                     <!-- profile info & task notification -->
@@ -84,19 +84,17 @@
                                     </li>
 
                                     <li>
-                                        <a href="<?= base_url('admin/kelompok_tani') ?>"><i class="fa fa-user-md"></i><span>Kelompok Tani</span></a>
+                                        <a href="<?= base_url('admin/kelurahan') ?>"><i class="fa fa-user-md"></i><span>Hasil Pertanian</span></a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)"><i class="ti-pie-chart"></i><span>Data</span></a>
                                         <ul class="submenu">
                                             <li><a href="<?= base_url('admin/kecamatan') ?>">Kecamatan</a></li>
-                                            <li><a href="<?= base_url('admin/kelurahan') ?>">Kelurahan</a></li>
-                                            <li><a href="<?= base_url('admin/saran') ?>">Kritik & Saran</a></li>
+                                            <li><a href="<?= base_url('admin/jenis_tanaman') ?>">Jenis Tanaman</a></li>
+                                            <li><a href="<?= base_url('admin/about') ?>">About</a></li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="<?= base_url('admin/berita') ?>"><i class="fa fa-newspaper-o"></i><span>Berita</span></a>
-                                    </li>
+
                                 </ul>
                             </nav>
                         </div>

@@ -5,7 +5,7 @@
          <div class="row">
             <div class="col-md-8">
                <p><b> Note:</b>
-                  <?php foreach ($lokasiKelompokTani as $data) : ?>
+                  <?php foreach ($dataKelurahan as $data) : ?>
                      <?= $data->nama ?><img src="<?= base_url('assets/images/icon/icon-marker/' . $data->icon)  ?>" width="20">,
                   <?php endforeach; ?>
                </p>
@@ -16,43 +16,25 @@
 
             <div class="col-md-4">
                <div class="row">
-                  <div id="kelurahan" class="col-md-12">
-                     <div class="form-group">
-                        <select id="kategori" name="kategori" class="custom-select">
-                           <option value="0" selected>-- Kelurahan --</option>
-                           <?php foreach ($dataKelurahan as $kelurahan) : ?>
-                              <option value="<?= $kelurahan->id ?>"><?= $kelurahan->nama ?></option>
-                           <?php endforeach; ?>
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-12 mb-3 d-flex justify-content-center">
-                     <button id="search" class="btn btn-mod">Search</button>
-                  </div>
+
                   <div class="col-md-12">
                      <div class="search-box py-4 px-3">
-                        <div class="form-group">
-                           <input type="text" id="start" class="form-control" placeholder="Alamat anda....">
+                        <div class="col-md-12 text-center">
+                           <h5>Cari Kelurahan</h5>
                         </div>
-                        <div class="select-box">
+                        <div id="kelurahan" class="col-md-12">
                            <div class="form-group">
-                              <select name="end" id='end' class="custom-select">
-                                 <option disabled selected>Kelompok Tani Tujuan Anda</option>
-                                 <?php $i = 0;
-                                 foreach ($lokasiKelompokTani as $kelompokTani) : ?>
-                                    <option value="<?= $kelompokTani->lat . ',' . $kelompokTani->lng ?>"><?= $kelompokTani->nama  ?></option>
+                              <select id="kategori" name="kategori" class="custom-select">
+                                 <option value="0" selected>-- Kelurahan --</option>
+                                 <?php foreach ($dataKelurahan as $kelurahan) : ?>
+                                    <option value="<?= $kelurahan->id ?>"><?= $kelurahan->nama ?></option>
                                  <?php endforeach; ?>
                               </select>
                            </div>
                         </div>
-                     </div>
-                  </div>
-
-
-
-                  <div class="col-md-12 py-4">
-                     <div id="direction-box" class="direction-box">
-
+                        <div class="col-md-12 mb-3 d-flex justify-content-center">
+                           <button id="search" class="btn btn-search">Search</button>
+                        </div>
                      </div>
                   </div>
 

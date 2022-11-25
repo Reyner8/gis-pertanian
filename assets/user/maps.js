@@ -30,7 +30,7 @@ async function initMap() {
 			});
 		}
 		// direction
-		direction();
+		// direction();
 	}
 }
 
@@ -50,6 +50,7 @@ function getLoc(url = "") {
 
 // function Marker
 function addMarker(props) {
+	// console.log('test');
 	// add marker
 	marker = new google.maps.Marker({
 		position: {
@@ -59,44 +60,37 @@ function addMarker(props) {
 		icon: `${baseUrl}assets/images/icon/icon-marker/${props.icon}`,
 		size: new google.maps.Size(70, 80),
 		map: map,
+		label: { color: 'black', fontWeight: 'bold',  fontSize: '14px', text: `Kelurahan ${props.namaKelurahan}` }
 	});
 
 	// popup window
 	infowindow = new google.maps.InfoWindow();
 	// event listener Popup Window
 	marker.addListener("click", function (event) {
-		infowindow.close();
-		infowindow.open(map, marker);
-		infowindow.setContent(content(props));
-		infowindow.setPosition(event.latLng);
+		draw(this, props)
+		
 	});
 
 	// filter : add event handler when looping
 	if (document.querySelector("#kategori")) {
 		filter(props, marker);
+		
 	}
 }
 
-// content popup fn
-function content(data) {
-	return `<div class="card">
-				<div class="card-body">
-					<h6>${data.nama}</h6>
-					<p>Alamat - ${data.alamat}</p>
-					<a href="${baseUrl}lokasi/detailKelompokTani/${data.id}">Detail</a>
-				</div>
-			  </div>`;
+
+function drawButton() {
+	return '<div><button>Hello</button></div>';
 }
 
 function filter(data, marker) {
 	const searchBtn = document.querySelector("#search");
 	searchBtn.addEventListener("click", function () {
 		const kelurahan = document.querySelector("#kelurahan #kategori").value;
-
 		if (kelurahan == 0) {
 			marker.setVisible(true);
 		} else {
-			if (data.id_kelurahan != kelurahan) {
+			if (data.idKelurahan != kelurahan) {
 				marker.setVisible(false);
 			} else {
 				marker.setVisible(true);
@@ -105,88 +99,36 @@ function filter(data, marker) {
 	});
 }
 
-function direction() {
-	const directionsService = new google.maps.DirectionsService();
-	const directionsRenderer = new google.maps.DirectionsRenderer({
-		suppressMarkers: true,
-	});
+function draw(marker, props) {
+	// console.log(props.dataColumns);
+	// console.log(props.dataRows);
+	// console.log(props.tahun);
+	// console.log(props.data);
+	
+	// Create the data table.
+	var data = new google.visualization.DataTable()
+	data.addColumn('string', 'Tahun');
+	props.dataColumns.forEach(column => data.addColumn('number', column));
+	
+	// result : [['tahun', hasilangka1, hasilangka2, dst]] 
+	data.addRows(props.dataRows);
 
-	directionsRenderer.setMap(map);
+	// Set chart options
+	var options = {'title':`Hasil Pertanian Kelurahan ${props.namaKelurahan}`,
+				   'width':200,
+				   'height':150,
+				   'bar': {groupWidth: "95%"},
+				   'legend': { position: "none" }};
+				   
+	var node        = document.createElement('div'),
+		infoWindow  = new google.maps.InfoWindow(),
+		chart       = new google.visualization.ColumnChart(node);
 
-	// panel direction
-	directionsRenderer.setPanel(document.getElementById("direction-box"));
-	const startEventHandler = function (e) {
-		if (e.keyCode == 13) {
-			calculateAndDisplayRoute(directionsService, directionsRenderer);
-		}
-	};
-	const endEventHandler = function () {
-		calculateAndDisplayRoute(directionsService, directionsRenderer);
-	};
+		
+		chart.draw(data, options);
+		infoWindow.setContent(node);
+		infoWindow.open(marker.getMap(),marker);
+  }
 
-	const start = document.getElementById("start");
-	const end = document.getElementById("end");
-	autoComplete();
-	if (start) {
-		start.addEventListener("keydown", startEventHandler);
-		end.addEventListener("change", endEventHandler);
-	}
-}
 
-async function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-	// get icon
-	let dataLoc = await getLoc(`${baseUrl}lokasi/lokasiJSON`);
-	let iconDestination;
-	dataLoc.forEach((dl) => {
-		let getValue = document.getElementById("end").value;
-		if (`${dl.latitude},${dl.longitude}` == getValue) {
-			iconDestination = dl.icon;
-		}
-	});
-	// set icon start and end
-	var icons = {
-		start: new google.maps.MarkerImage(
-			`${baseUrl}assets/images/icon/starting-marker.png`
-		),
-		end: new google.maps.MarkerImage(
-			`${baseUrl}assets/images/icon/icon-marker/${iconDestination}`
-		),
-	};
-	directionsService.route(
-		{
-			origin: {
-				query: document.getElementById("start").value,
-			},
-			destination: {
-				query: document.getElementById("end").value,
-			},
-			travelMode: google.maps.TravelMode.DRIVING,
-		},
-		(response, status) => {
-			if (status === "OK") {
-				directionsRenderer.setDirections(response);
-				var leg = response.routes[0].legs[0];
-				makeMarker(leg.start_location, icons.start, "start");
-				makeMarker(leg.end_location, icons.end, "end");
-			} else {
-				window.alert("Directions request failed due to " + status);
-			}
-		}
-	);
-}
-
-function makeMarker(position, icon, title) {
-	new google.maps.Marker({
-		position: position,
-		map: map,
-		icon: icon,
-		title: title,
-	});
-}
-
-function autoComplete() {
-	const input = document.getElementById("start");
-	const autocomplete = new google.maps.places.Autocomplete(input);
-	autocomplete.bindTo("bounds", map);
-	autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
-}
+google.load('visualization', '1.0', {'packages':['corechart']});

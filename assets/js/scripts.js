@@ -372,6 +372,17 @@ updateBtnKec.forEach((el) => {
 			url + "/" + this.dataset.id;
 	});
 });
+// Update Jenis
+const updateBtnJenis = document.querySelectorAll("#update-btn-jenis");
+updateBtnJenis.forEach((el) => {
+	el.addEventListener("click", function () {
+		document.querySelector("#update-modal input[name=nama]").value =
+			this.dataset.nama;
+		const url = document.querySelector("#update-modal").action;
+		document.querySelector("#update-modal").action =
+			url + "/" + this.dataset.id;
+	});
+});
 
 // Update Kelurahan
 const updateBtnKel = document.querySelectorAll("#update-btn-kel");

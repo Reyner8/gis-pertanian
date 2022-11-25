@@ -1,3 +1,7 @@
+$(document).ready( function () {
+  $('#datatable').DataTable();
+} );
+
 // add class name 'active'
 const currentLoc = location.href;
 const menu = document.querySelectorAll('.nav-item');
@@ -51,7 +55,7 @@ window.addEventListener("beforeunload", function (e) {
 const searchInput = document.getElementById('searchInput');
 const contentBox = document.getElementById('content');
 console.log('seeee');
-searchInput.addEventListener('input', function(e) {
+searchInput.addEventListener('input', async function(e) {
   console.log(e.target.value)
   let dataDokter = await getDokter(`${baseUrl}dokter/searchData/${e.value}`);
 

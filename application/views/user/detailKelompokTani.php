@@ -3,44 +3,30 @@
    <section class="news">
       <div class="container">
          <div class="row">
-            <div class="col-md-5">
 
-               <h6>Gallery</h6>
-               <hr>
-               <div class="row">
-                  <?php foreach ($galeri as $g) : ?>
-                     <div class="col-md-6 mb-2">
-                        <img width="200" src="<?= base_url('assets/images/galeri/' . $g->nama) ?>" alt="Gambar">
-                     </div>
-
-                  <?php endforeach; ?>
-               </div>
-
+            <div class="col-md-7">
+               <a href="<?= base_url('lokasi') ?>" class="btn btn-primary btn-outline btn-sm">Kembali</a>
             </div>
             <div class="col-md-7">
                <div class="biodata mb-5">
-                  <h3><?= ucwords($kelompokTani->nama) ?></h3>
-                  <p class="mb-2"><i class="fa fa-map-marker"></i> Alamat : <?= $kelompokTani->alamat ?></p>
-                  <p class="mb-2"><i class="fa fa-map"></i> latitude / Longitude : <?= $kelompokTani->lat . ' / ' .  $kelompokTani->lng ?></p>
-                  <h6>Hasil Panen :</h6>
+                  <h3>Kelurahan <?= ucwords($kelurahan->nama) ?></h3>
+                  <p class="mb-2"><i class="fa fa-map-marker"></i> Kecamatan : <?= $kelurahan->namaKecamatan ?></p>
+                  <p class="mb-2"><i class="fa fa-map"></i> latitude / Longitude : <?= $kelurahan->lat . ' / ' .  $kelurahan->lng ?></p>
+                  <h6>Kelompok Tani :</h6>
                   <table class="table table-bordered">
                      <thead>
                         <tr>
-                           <th scope="col">Nama Tanaman</th>
-                           <th scope="col">Jumlah Ditanam</th>
-                           <th scope="col">Jumlah Panen</th>
-                           <th scope="col">Modal Awal</th>
-                           <th scope="col">Hasil Jual</th>
+                           <th scope="col">Nama Kelompok</th>
+                           <th scope="col">Alamat</th>
+                           <th scope="col">#</th>
                         </tr>
                      </thead>
                      <tbody>
-                        <?php foreach ($hasil as $h) : ?>
+                        <?php foreach ($kelompokTani as $kt) : ?>
                            <tr>
-                              <td><?= $h->nama ?></td>
-                              <td><?= $h->ditanam ?></td>
-                              <td><?= $h->panen ?></td>
-                              <td>Rp. <?= $h->modal_awal ?></td>
-                              <td>Rp. <?= $h->hasil_jual ?></td>
+                              <td><?= $kt->nama ?></td>
+                              <td><?= $kt->alamat ?></td>
+                              <td> <a href="<?= base_url('lokasi/hasilPanen/' . $kt->id) ?>" class="btn btn-info btn-outline btn-sm">Hasil Panen</a> </td>
                            </tr>
                         <?php endforeach; ?>
                      </tbody>

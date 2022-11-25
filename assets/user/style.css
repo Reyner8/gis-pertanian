@@ -74,6 +74,12 @@ a.link:hover {
 	border-color: #84d150;
 }
 
+.btn-search{
+	color: #fff;
+	background-color: #84d150;
+	border-color: #446e28;
+}
+
 .btn-mod:hover {
 	color: #fff;
 	background-color: #9fe66f;

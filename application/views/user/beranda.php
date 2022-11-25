@@ -8,7 +8,7 @@
             <div class="row align-items-center">
                <div class="col-md">
                   <h1 class="display-4">Sistem Informasi Geografis</h1>
-                  <p class="lead">Sistem Informasi Geografis Lokasi Kelompok Tani Berbasis Web</p>
+                  <p class="lead"> sistem informasi geografis pemetaan hasil pertanian berbasis web</p>
                </div>
                <div class="col-md">
                   <img src="<?= base_url('assets/user/illustration/jumbotron.svg') ?>" class="img-fluid" alt="jumbotron">

@@ -14,15 +14,16 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src='<?= base_url('assets/user/select2.min.js') ?>' type='text/javascript'></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- maps -->
 <script>
    const baseUrl = "<?= base_url() ?>";
 </script>
 <script src="<?= base_url('assets/user/script.js') ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMDVKjRep_9KhuXib8nA2iGgUONvsribE&callback=initMap&libraries=places" async defer></script>
-<script script src="<?= base_url('assets/user/maps.js') ?>">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MgLuZuyqR_OGY3ob3M52N46TDBRI_9k&callback=initMap&libraries=places" async defer></script>
+<script script src="<?= base_url('assets/user/maps.js') ?>"></script>
+<script script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js">
 </script>
 </body>
 
