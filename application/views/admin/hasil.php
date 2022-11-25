@@ -95,12 +95,13 @@
                <!-- Data Berita -->
                <div class="card">
                   <div class="card-body">
-                     <h4 class="header-title">Hasil Panen <?= ($isEditHasil) ? $editHasil->namaKelurahan : $kelurahan->namaKelurahan ?></h4>
+                     <h4 class="header-title">Hasil Panen Desa <?= ($isEditHasil) ? $editHasil->namaKelurahan : $kelurahan->namaKelurahan ?></h4>
                      <div class="datatable datatable-primary">
                         <table class="table text-center" id="datatable-dua">
                            <thead class="text-capitalize">
                               <tr>
                                  <th scope="col">No.</th>
+                                 <th scope="col">ID</th>
                                  <th scope="col">Nama Tanaman</th>
                                  <th scope="col">Jenis Tanaman</th>
                                  <th scope="col">Hasil Panen</th>
@@ -113,6 +114,7 @@
                               foreach ($hasilPanen as $hasil) : ?>
                                  <tr>
                                     <th scope="row"><?= $number++ ?></th>
+                                    <td><?= $hasil->id ?></td>
                                     <td><?= $hasil->nama ?></td>
                                     <td><?= $hasil->jenisTanaman ?></td>
                                     <td><?= $hasil->hasil ?> / Ton</td>

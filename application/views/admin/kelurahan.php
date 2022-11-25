@@ -111,13 +111,14 @@
                <!-- Data Berita -->
                <div class="card">
                   <div class="card-body">
-                     <h4 class="header-title">Data Kelurahan</h4>
+                     <h4 class="header-title">Data Desa</h4>
                      <div class="datatable datatable-primary">
                         <table class="table text-center" id="datatable">
                            <thead class="text-capitalize">
                               <tr>
                                  <th scope="col">No.</th>
-                                 <th scope="col">Kelurahan</th>
+                                 <th scope="col">ID</th>
+                                 <th scope="col">Desa</th>
                                  <th scope="col">Kecamatan</th>
                                  <th scope="col">Longitude/Lattitude</th>
                                  <th scope="col">Action</th>
@@ -128,6 +129,7 @@
                               foreach ($dataKelurahan as $kelurahan) : ?>
                                  <tr>
                                     <th scope="row"><?= $number++ ?></th>
+                                    <td><?= $kelurahan->idKelurahan ?></td>
                                     <td><?= $kelurahan->namaKelurahan ?></td>
                                     <td><?= $kelurahan->namaKecamatan ?></td>
                                     <td><?= $kelurahan->lng . '/' . $kelurahan->lat ?></td>

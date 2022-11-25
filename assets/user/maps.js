@@ -60,7 +60,7 @@ function addMarker(props) {
 		icon: `${baseUrl}assets/images/icon/icon-marker/${props.icon}`,
 		size: new google.maps.Size(70, 80),
 		map: map,
-		label: { color: 'black', fontWeight: 'bold',  fontSize: '14px', text: `Kelurahan ${props.namaKelurahan}` }
+		label: { color: 'black', fontWeight: 'bold',  fontSize: '14px', text: `Desa ${props.namaKelurahan}` }
 	});
 
 	// popup window
@@ -114,7 +114,7 @@ function draw(marker, props) {
 	data.addRows(props.dataRows);
 
 	// Set chart options
-	var options = {'title':`Hasil Pertanian Kelurahan ${props.namaKelurahan}`,
+	var options = {'title':`Hasil Pertanian Desa ${props.namaKelurahan}`,
 				   'width':200,
 				   'height':150,
 				   'bar': {groupWidth: "95%"},

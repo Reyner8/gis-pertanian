@@ -20,12 +20,12 @@
                   <div class="col-md-12">
                      <div class="search-box py-4 px-3">
                         <div class="col-md-12 text-center">
-                           <h5>Cari Kelurahan</h5>
+                           <h5>Cari Desa</h5>
                         </div>
                         <div id="kelurahan" class="col-md-12">
                            <div class="form-group">
                               <select id="kategori" name="kategori" class="custom-select">
-                                 <option value="0" selected>-- Kelurahan --</option>
+                                 <option value="0" selected>-- Desa --</option>
                                  <?php foreach ($dataKelurahan as $kelurahan) : ?>
                                     <option value="<?= $kelurahan->id ?>"><?= $kelurahan->nama ?></option>
                                  <?php endforeach; ?>

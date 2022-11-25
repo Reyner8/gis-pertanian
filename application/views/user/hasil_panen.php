@@ -5,7 +5,7 @@
          <div class="row">
             <div class="col-md-12">
                <h1 class="title text-center">Hasil Panen</h1>
-               <p class="title text-center mb-5">Pilih berdasarkan kelurahan</p>
+               <p class="title text-center mb-5">Pilih berdasarkan Kecamatan</p>
             </div>
             <div class="col-md-3">
                <div class="card">
@@ -32,7 +32,7 @@
                         <table id="datatable" class="table table-bordered">
                            <thead>
                               <tr>
-                                 <th scope="col">Kelurahan</th>
+                                 <th scope="col">Desa</th>
                                  <?php foreach ($jenisTanaman as $jt) : ?>
                                     <th scope="col"><?= $jt->nama ?></th>
                                  <?php endforeach; ?>

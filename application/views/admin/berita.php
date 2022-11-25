@@ -30,6 +30,7 @@
 										<thead class="text-capitalize">
 											<tr>
 												<th scope="col">No.</th>
+												<th scope="col">ID</th>
 												<th scope="col">Judul Berita</th>
 												<th scope="col">Isi</th>
 												<th scope="col">Gambar</th>
@@ -42,6 +43,7 @@
 											foreach ($dataBerita as $berita) : ?>
 												<tr>
 													<th scope="row"><?= $number++ ?></th>
+													<th><?= $berita->id ?></th>
 													<td><?= $berita->judul ?></td>
 													<td>
 														<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" data-value="<?= $berita->isi ?>"><i class="fa fa-info"></i></button>
