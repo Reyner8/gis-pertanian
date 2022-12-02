@@ -7,35 +7,35 @@ class admin extends CI_Model
         return $this->db->query("SELECT * FROM admin WHERE email = '$email'")->result();
     }
 
-    public function hasilPanenByKelurahan($id)
+    public function hasilPanenByDesa($id)
     {
         return $this->db->query("SELECT hasil_panen.*, jenis_tanaman.nama AS jenisTanaman FROM hasil_panen
         JOIN jenis_tanaman ON jenis_tanaman.id = hasil_panen.id_jenis
-        WHERE hasil_panen.id_kelurahan = '$id'")->result();
+        WHERE hasil_panen.id_desa = '$id'")->result();
     }
 
-    public function getHasilSum($idKelurahan)
+    public function getHasilSum($idDesa)
     {
         return $this->db->query("SELECT jenis_tanaman.nama, SUM(hasil_panen.hasil) AS hasil
         FROM jenis_tanaman JOIN hasil_panen ON jenis_tanaman.id = hasil_panen.id_jenis
-        WHERE hasil_panen.id_kelurahan = '$idKelurahan' GROUP BY jenis_tanaman.id")->result();
+        WHERE hasil_panen.id_desa = '$idDesa' GROUP BY jenis_tanaman.id")->result();
     }
 
-    public function getHasilByIdKelurahan($id)
+    public function getHasilByIdDesa($id)
     {
-        return $this->db->query("SELECT hasil_panen.*, kelurahan.nama AS namaKelurahan, jenis_tanaman.nama AS namaJenis FROM hasil_panen
-        JOIN kelurahan ON kelurahan.id = hasil_panen.id_kelurahan
+        return $this->db->query("SELECT hasil_panen.*, desa.nama AS namaDesa, jenis_tanaman.nama AS namaJenis FROM hasil_panen
+        JOIN desa ON desa.id = hasil_panen.id_desa
         JOIN jenis_tanaman ON jenis_tanaman.id = hasil_panen.id_jenis
-        WHERE kelurahan.id = '$id'")->result();
+        WHERE desa.id = '$id'")->result();
     }
 
     public function getKelompokTaniById($id)
     {
         return $this->db->query("SELECT 
-        kelompok_tani.*, kelurahan.nama AS namaKelurahan, kecamatan.nama AS namaKecamatan
-        FROM kelompok_tani, kecamatan, kelurahan
-        WHERE kelompok_tani.id_kelurahan = kelurahan.id AND 
-        kelurahan.id_kecamatan = kecamatan.id AND
+        kelompok_tani.*, desa.nama AS namaDesa, kecamatan.nama AS namaKecamatan
+        FROM kelompok_tani, kecamatan, desa
+        WHERE kelompok_tani.id_desa = desa.id AND 
+        desa.id_kecamatan = kecamatan.id AND
         kelompok_tani.id = $id")->row();
     }
 
@@ -113,7 +113,7 @@ class admin extends CI_Model
 
     public function getLokasi()
     {
-        return $this->db->query("SELECT lokasi.* , kelurahan.nama FROM lokasi,kelurahan WHERE lokasi.id_kelurahan = kelurahan.id")->result();
+        return $this->db->query("SELECT lokasi.* , desa.nama FROM lokasi,desa WHERE lokasi.id_desa = desa.id")->result();
     }
 
     public function getBerandaLokasi()
@@ -133,7 +133,7 @@ class admin extends CI_Model
 
     public function getKelompokTani()
     {
-        return $this->db->query("SELECT kelompok_tani.*, kelurahan.nama AS namaKelurahan, kecamatan.nama AS namaKecamatan FROM kelompok_tani, kecamatan, kelurahan WHERE kelompok_tani.id_kelurahan =  kelurahan.id AND kecamatan.id = kelurahan.id_kecamatan")->result();
+        return $this->db->query("SELECT kelompok_tani.*, desa.nama AS namaDesa, kecamatan.nama AS namaKecamatan FROM kelompok_tani, kecamatan, desa WHERE kelompok_tani.id_desa =  desa.id AND kecamatan.id = desa.id_kecamatan")->result();
     }
 
     public function getKelompokTaniByName($name)
@@ -146,25 +146,25 @@ class admin extends CI_Model
         return $this->db->query("SELECT * FROM kecamatan")->result();
     }
 
-    public function getKelurahan()
+    public function getDesa()
     {
-        return $this->db->query("SELECT kelurahan.lng, kelurahan.lat, kelurahan.id AS idKelurahan, kecamatan.id AS idKecamatan,kelurahan.nama AS namaKelurahan, kecamatan.nama AS namaKecamatan FROM kelurahan,kecamatan WHERE kecamatan.id = kelurahan.id_kecamatan")->result();
+        return $this->db->query("SELECT desa.lng, desa.lat, desa.id AS idDesa, kecamatan.id AS idKecamatan,desa.nama AS namaDesa, kecamatan.nama AS namaKecamatan FROM desa,kecamatan WHERE kecamatan.id = desa.id_kecamatan")->result();
     }
-    public function getKelurahanById($id)
+    public function getDesaById($id)
     {
-        return $this->db->query("SELECT kelurahan.lng, kelurahan.lat,
-        kelurahan.id AS idKelurahan,
-        kelurahan.icon,
+        return $this->db->query("SELECT desa.lng, desa.lat,
+        desa.id AS idDesa,
+        desa.icon,
         kecamatan.id AS idKecamatan,
-        kelurahan.nama AS namaKelurahan,
+        desa.nama AS namaDesa,
         kecamatan.nama AS namaKecamatan 
-        FROM kelurahan,kecamatan WHERE kecamatan.id = kelurahan.id_kecamatan 
-        AND kelurahan.id = '$id'")->row();
+        FROM desa,kecamatan WHERE kecamatan.id = desa.id_kecamatan 
+        AND desa.id = '$id'")->row();
     }
 
-    public function getAllKelurahan()
+    public function getAllDesa()
     {
-        return $this->db->query("SELECT * FROM kelurahan")->result();
+        return $this->db->query("SELECT * FROM desa")->result();
     }
 
     public function getGaleriById($idKelompokTani)
@@ -198,7 +198,7 @@ class admin extends CI_Model
 
     public function getHasilByIdRow($id)
     {
-        return $this->db->query("SELECT hasil_panen.*, kelurahan.nama AS namaKelurahan FROM hasil_panen JOIN kelurahan ON kelurahan.id = hasil_panen.id_kelurahan WHERE hasil_panen.id = '$id'")->row();
+        return $this->db->query("SELECT hasil_panen.*, desa.nama AS namaDesa FROM hasil_panen JOIN desa ON desa.id = hasil_panen.id_desa WHERE hasil_panen.id = '$id'")->row();
     }
 
     public function getSaran()
@@ -236,9 +236,9 @@ class admin extends CI_Model
         $this->db->insert('jenis_tanaman', $data);
     }
 
-    public function insertKelurahan($data)
+    public function insertDesa($data)
     {
-        $this->db->insert('kelurahan', $data);
+        $this->db->insert('desa', $data);
     }
 
     public function insertGaleri($data)
@@ -279,9 +279,9 @@ class admin extends CI_Model
         $this->db->update('jenis_tanaman', $data, array('id' => $id));
     }
 
-    public function updateKelurahan($id, $data)
+    public function updateDesa($id, $data)
     {
-        $this->db->update('kelurahan', $data, array('id' => $id));
+        $this->db->update('desa', $data, array('id' => $id));
     }
 
     public function deleteBerita($id)
@@ -299,9 +299,9 @@ class admin extends CI_Model
         $this->db->delete('jenis_tanaman', array('id' => $id));
     }
 
-    public function deleteKelurahan($id)
+    public function deleteDesa($id)
     {
-        $this->db->delete('kelurahan', array('id' => $id));
+        $this->db->delete('desa', array('id' => $id));
     }
 
     public function deleteGaleri($id)

@@ -19,7 +19,7 @@ class beranda extends CI_Controller
         $data = array(
             'title' => 'Beranda',
             'name' => $this->session->userdata('username'),
-            'dataTotalKelurahan' => count($this->admin->getKelurahan()),
+            'dataTotalDesa' => count($this->admin->getDesa()),
         );
         $this->load->view('admin/beranda', $data);
     }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class kelurahan extends CI_Controller
+class desa extends CI_Controller
 {
    public function __construct()
    {
@@ -16,18 +16,18 @@ class kelurahan extends CI_Controller
    public function index()
    {
       $data = array(
-         'title' => 'Kelurahan',
+         'title' => 'Desa',
          'name' => $this->session->userdata('username'),
-         'dataKelurahan' => $this->admin->getKelurahan(),
+         'dataDesa' => $this->admin->getDesa(),
          'dataKecamatan' => $this->admin->getKecamatan(),
          'isEdit' => false
       );
-      $this->load->view('admin/kelurahan', $data);
+      $this->load->view('admin/desa', $data);
    }
 
-   public function addKelurahan()
+   public function addDesa()
    {
-      $this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required');
+      $this->form_validation->set_rules('desa', 'Desa', 'required');
       $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'callback_dropdownCheck');
       $this->form_validation->set_rules('lng', 'Longitude', 'required');
       $this->form_validation->set_rules('lat', 'Lattitude', 'required');
@@ -39,31 +39,31 @@ class kelurahan extends CI_Controller
       }
 
       if ($this->form_validation->run()) {
-         $this->admin->insertKelurahan(array(
-            'nama' => $this->input->post('kelurahan'),
+         $this->admin->insertDesa(array(
+            'nama' => $this->input->post('desa'),
             'lng' => $this->input->post('lng'),
             'lat' => $this->input->post('lat'),
             'icon' => $uploadImage,
             'id_kecamatan' => $this->input->post('kecamatan')
          ));
 
-         redirect('admin/kelurahan');
+         redirect('admin/desa');
       } else {
          $this->index();
       }
    }
 
-   public function editKelurahan($id)
+   public function editDesa($id)
    {
       $data = array(
-         'title' => 'Kelurahan',
+         'title' => 'Desa',
          'name' => $this->session->userdata('username'),
-         'dataKelurahan' => $this->admin->getKelurahan(),
+         'dataDesa' => $this->admin->getDesa(),
          'dataKecamatan' => $this->admin->getKecamatan(),
-         'editData' => $this->admin->getKelurahanById($id),
+         'editData' => $this->admin->getDesaById($id),
          'isEdit' => true
       );
-      $this->load->view('admin/kelurahan', $data);
+      $this->load->view('admin/desa', $data);
    }
 
    public function dropdownCheck($str)
@@ -76,29 +76,29 @@ class kelurahan extends CI_Controller
       }
    }
 
-   public function updateKelurahan($id)
+   public function updateDesa($id)
    {
       $image = $_FILES['image']['name'];
       $uploadImage = '';
       if ($image == '') {
-         $uploadImage = $this->admin->getKelurahanById($id)->icon;
+         $uploadImage = $this->admin->getDesaById($id)->icon;
       } else {
          $uploadImage = $this->__uploadImage($image, './assets/images/icon/icon-marker/');
       }
-      $this->admin->updateKelurahan($id, array(
-         'nama' =>  $this->input->post('kelurahan'),
+      $this->admin->updateDesa($id, array(
+         'nama' =>  $this->input->post('desa'),
          'lng' => $this->input->post('lng'),
          'lat' => $this->input->post('lat'),
          'icon' => $uploadImage,
          'id_kecamatan' =>  $this->input->post('kecamatan')
       ));
-      redirect('admin/kelurahan');
+      redirect('admin/desa');
    }
 
-   public function deleteKelurahan($id)
+   public function deleteDesa($id)
    {
-      $this->admin->deleteKelurahan($id);
-      redirect('admin/kelurahan');
+      $this->admin->deleteDesa($id);
+      redirect('admin/desa');
    }
 
    public function gambarCheck($str)

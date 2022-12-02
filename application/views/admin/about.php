@@ -57,16 +57,16 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Kelurahan</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Update Desa</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form id="update-modal" method="POST" action="<?= base_url('admin/kelurahan/updateKelurahan') ?>">
+         <form id="update-modal" method="POST" action="<?= base_url('admin/desa/updateDesa') ?>">
             <div class="modal-body">
                <div class="form-group">
-                  <label for="kelurahan" class="col-form-label">Kelurahan: </label>
-                  <input type="text" class="form-control" name="kelurahan">
+                  <label for="desa" class="col-form-label">Desa: </label>
+                  <input type="text" class="form-control" name="desa">
                </div>
                <div class="form-group">
                   <label for="kecamatan" class="col-form-label">Kecamatan: </label>

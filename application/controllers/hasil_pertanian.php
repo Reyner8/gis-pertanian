@@ -32,7 +32,7 @@ class hasil_pertanian extends CI_Controller
             'title' => 'Hasil Pertanian',
             'hasilSum' => $this->user->getHasilSumPerKelurahan($idKecamatan),
             'hasil' => $this->user->getHasil(),
-            'kelurahan' => $this->user->getKelurahan($idKecamatan),
+            'desa' => $this->user->getDesa($idKecamatan),
             'jenisTanaman' => $this->user->getJenisTanaman(),
             'kecamatan' => $this->user->getKecamatan(),
             'isSearch' => true,

@@ -5,7 +5,7 @@
          <div class="row">
             <div class="col-md-8">
                <p><b> Note:</b>
-                  <?php foreach ($dataKelurahan as $data) : ?>
+                  <?php foreach ($dataDesa as $data) : ?>
                      <?= $data->nama ?><img src="<?= base_url('assets/images/icon/icon-marker/' . $data->icon)  ?>" width="20">,
                   <?php endforeach; ?>
                </p>
@@ -22,12 +22,12 @@
                         <div class="col-md-12 text-center">
                            <h5>Cari Desa</h5>
                         </div>
-                        <div id="kelurahan" class="col-md-12">
+                        <div id="desa" class="col-md-12">
                            <div class="form-group">
                               <select id="kategori" name="kategori" class="custom-select">
                                  <option value="0" selected>-- Desa --</option>
-                                 <?php foreach ($dataKelurahan as $kelurahan) : ?>
-                                    <option value="<?= $kelurahan->id ?>"><?= $kelurahan->nama ?></option>
+                                 <?php foreach ($dataDesa as $desa) : ?>
+                                    <option value="<?= $desa->id ?>"><?= $desa->nama ?></option>
                                  <?php endforeach; ?>
                               </select>
                            </div>

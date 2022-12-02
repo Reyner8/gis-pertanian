@@ -5,7 +5,7 @@
       <div class="container">
          <div class="row mt-4">
             <div class="col-md-6">
-               <a class="btn btn-primary" href="<?= base_url('admin/kelurahan') ?>"><i class="fa fa-arrow-left"></i> Kembali</a>
+               <a class="btn btn-primary" href="<?= base_url('admin/desa') ?>"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
          </div>
          <!-- Hasil Panen -->
@@ -18,7 +18,7 @@
                   <div class="card-body">
                      <?php if (!$isEditHasil) : ?>
                         <h4 class="header-title">Add Hasil Panen</h4>
-                        <form action="<?= base_url('admin/hasil_panen/addHasil/' . $kelurahan->idKelurahan) ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= base_url('admin/hasil_panen/addHasil/' . $desa->idDesa) ?>" method="POST" enctype="multipart/form-data">
 
                            <div class="form-group">
                               <label for="nama" class="col-form-label">Nama Tanaman</label>
@@ -95,7 +95,7 @@
                <!-- Data Berita -->
                <div class="card">
                   <div class="card-body">
-                     <h4 class="header-title">Hasil Panen Desa <?= ($isEditHasil) ? $editHasil->namaKelurahan : $kelurahan->namaKelurahan ?></h4>
+                     <h4 class="header-title">Hasil Panen Desa <?= ($isEditHasil) ? $editHasil->namaDesa : $desa->namaDesa ?></h4>
                      <div class="datatable datatable-primary">
                         <table class="table text-center" id="datatable-dua">
                            <thead class="text-capitalize">

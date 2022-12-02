@@ -84,7 +84,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="<?= base_url('admin/kelurahan') ?>"><i class="fa fa-user-md"></i><span>Hasil Pertanian</span></a>
+                                        <a href="<?= base_url('admin/desa') ?>"><i class="fa fa-user-md"></i><span>Hasil Pertanian</span></a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)"><i class="ti-pie-chart"></i><span>Data</span></a>

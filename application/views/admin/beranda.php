@@ -11,8 +11,8 @@
                             <div class="card">
                                 <div class="seo-fact sbg2">
                                     <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <div class="seofct-icon"><i class="fa fa-home"></i> Total Kelurahan</div>
-                                        <h2><?= $dataTotalKelurahan ?></h2>
+                                        <div class="seofct-icon"><i class="fa fa-home"></i> Total Desa</div>
+                                        <h2><?= $dataTotalDesa ?></h2>
                                     </div>
                                 </div>
                             </div>

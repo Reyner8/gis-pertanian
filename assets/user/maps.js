@@ -60,7 +60,7 @@ function addMarker(props) {
 		icon: `${baseUrl}assets/images/icon/icon-marker/${props.icon}`,
 		size: new google.maps.Size(70, 80),
 		map: map,
-		label: { color: 'black', fontWeight: 'bold',  fontSize: '14px', text: `Desa ${props.namaKelurahan}` }
+		label: { color: 'black', fontWeight: 'bold',  fontSize: '14px', text: `Desa ${props.namaDesa}` }
 	});
 
 	// popup window
@@ -86,11 +86,11 @@ function drawButton() {
 function filter(data, marker) {
 	const searchBtn = document.querySelector("#search");
 	searchBtn.addEventListener("click", function () {
-		const kelurahan = document.querySelector("#kelurahan #kategori").value;
-		if (kelurahan == 0) {
+		const desa = document.querySelector("#desa #kategori").value;
+		if (desa == 0) {
 			marker.setVisible(true);
 		} else {
-			if (data.idKelurahan != kelurahan) {
+			if (data.idDesa != desa) {
 				marker.setVisible(false);
 			} else {
 				marker.setVisible(true);
@@ -114,7 +114,7 @@ function draw(marker, props) {
 	data.addRows(props.dataRows);
 
 	// Set chart options
-	var options = {'title':`Hasil Pertanian Desa ${props.namaKelurahan}`,
+	var options = {'title':`Hasil Pertanian Desa ${props.namaDesa}`,
 				   'width':200,
 				   'height':150,
 				   'bar': {groupWidth: "95%"},

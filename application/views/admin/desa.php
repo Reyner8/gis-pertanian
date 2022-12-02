@@ -9,11 +9,11 @@
                   <div class="card-body">
                      <?php if ($isEdit == false) : ?>
                         <h4 class="header-title">Add Data</h4>
-                        <form action="<?= base_url('admin/kelurahan/addKelurahan') ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= base_url('admin/desa/addDesa') ?>" method="POST" enctype="multipart/form-data">
                            <div class="form-group">
-                              <label for="kelurahan" class="col-form-label">Kelurahan</label>
-                              <input class="form-control" id="kelurahan" name="kelurahan">
-                              <div class="error"><?= form_error('kelurahan') ?></div>
+                              <label for="desa" class="col-form-label">Desa</label>
+                              <input class="form-control" id="desa" name="desa">
+                              <div class="error"><?= form_error('desa') ?></div>
                            </div>
 
                            <div class="form-group">
@@ -54,11 +54,11 @@
                            <button type="submit" class="btn btn-primary">Add Data</button>
                         </form>
                      <?php else : ?>
-                        <form action="<?= base_url('admin/kelurahan/updateKelurahan/' . $editData->idKelurahan) ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= base_url('admin/desa/updateDesa/' . $editData->idDesa) ?>" method="POST" enctype="multipart/form-data">
                            <div class="form-group">
-                              <label for="kelurahan" class="col-form-label">Kelurahan</label>
-                              <input class="form-control" id="kelurahan" name="kelurahan" value="<?= $editData->namaKelurahan ?>">
-                              <div class="error"><?= form_error('kelurahan') ?></div>
+                              <label for="desa" class="col-form-label">Desa</label>
+                              <input class="form-control" id="desa" name="desa" value="<?= $editData->namaDesa ?>">
+                              <div class="error"><?= form_error('desa') ?></div>
                            </div>
 
                            <div class="form-group">
@@ -126,18 +126,18 @@
                            </thead>
                            <tbody>
                               <?php $number = 1;
-                              foreach ($dataKelurahan as $kelurahan) : ?>
+                              foreach ($dataDesa as $desa) : ?>
                                  <tr>
                                     <th scope="row"><?= $number++ ?></th>
-                                    <td><?= $kelurahan->idKelurahan ?></td>
-                                    <td><?= $kelurahan->namaKelurahan ?></td>
-                                    <td><?= $kelurahan->namaKecamatan ?></td>
-                                    <td><?= $kelurahan->lng . '/' . $kelurahan->lat ?></td>
+                                    <td><?= $desa->idDesa ?></td>
+                                    <td><?= $desa->namaDesa ?></td>
+                                    <td><?= $desa->namaKecamatan ?></td>
+                                    <td><?= $desa->lng . '/' . $desa->lat ?></td>
                                     <td>
 
-                                       <a type="button" id="edit" class="btn btn-info" href="<?= base_url('admin/hasil_panen/data/' . $kelurahan->idKelurahan) ?>"><i class="fa fa-pencil"></i> Hasil Panen</a>
-                                       <a type="button" id="edit" class="btn btn-warning" href="<?= base_url('admin/kelurahan/editKelurahan/' . $kelurahan->idKelurahan) ?>"><i class="fa fa-pencil"></i></a>
-                                       <a href="<?= base_url('admin/kelurahan/deleteKelurahan/' . $kelurahan->idKelurahan) ?>" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                                       <a type="button" id="edit" class="btn btn-info" href="<?= base_url('admin/hasil_panen/data/' . $desa->idDesa) ?>"><i class="fa fa-pencil"></i> Hasil Panen</a>
+                                       <a type="button" id="edit" class="btn btn-warning" href="<?= base_url('admin/desa/editDesa/' . $desa->idDesa) ?>"><i class="fa fa-pencil"></i></a>
+                                       <a href="<?= base_url('admin/desa/deleteDesa/' . $desa->idDesa) ?>" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                  </tr>
                               <?php endforeach; ?>
@@ -159,16 +159,16 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Kelurahan</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Update Desa</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form id="update-modal" method="POST" action="<?= base_url('admin/kelurahan/updateKelurahan') ?>">
+         <form id="update-modal" method="POST" action="<?= base_url('admin/desa/updateDesa') ?>">
             <div class="modal-body">
                <div class="form-group">
-                  <label for="kelurahan" class="col-form-label">Kelurahan: </label>
-                  <input type="text" class="form-control" name="kelurahan">
+                  <label for="desa" class="col-form-label">Desa: </label>
+                  <input type="text" class="form-control" name="desa">
                </div>
                <div class="form-group">
                   <label for="kecamatan" class="col-form-label">Kecamatan: </label>

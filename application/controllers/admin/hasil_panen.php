@@ -18,8 +18,8 @@ class hasil_panen extends CI_Controller
       $data = array(
          'title' => 'Data Kelompok Tani',
          'name' => $this->session->userdata('username'),
-         'kelurahan' => $this->admin->getKelurahanById($id),
-         'hasilPanen' => $this->admin->hasilPanenByKelurahan($id),
+         'desa' => $this->admin->getDesaById($id),
+         'hasilPanen' => $this->admin->hasilPanenByDesa($id),
          // 'sumJenisTanaman' => $this->admin->getHasilSum($id),
          'jenisTanaman' => $this->admin->getJenisTanaman(),
          'isEditHasil' => false,
@@ -33,8 +33,8 @@ class hasil_panen extends CI_Controller
       $data = array(
          'title' => 'Edit Hasil',
          'name' => $this->session->userdata('username'),
-         'kelurahan' => $hasil->id_kelurahan,
-         'hasilPanen' => $this->admin->hasilPanenByKelurahan($hasil->id_kelurahan),
+         'desa' => $hasil->id_desa,
+         'hasilPanen' => $this->admin->hasilPanenByDesa($hasil->id_desa),
          'jenisTanaman' => $this->admin->getJenisTanaman(),
          'editHasil' => $this->admin->getHasilByIdRow($id),
          'isEditHasil' => true,
@@ -44,7 +44,7 @@ class hasil_panen extends CI_Controller
       $this->load->view('admin/hasil', $data);
    }
 
-   public function addHasil($idKelurahan)
+   public function addHasil($idDesa)
    {
       $this->form_validation->set_rules('nama', 'Nama', 'required');
       $this->form_validation->set_rules('jenis_tanaman', 'Jenis Tanaman', 'callback_dropdownCheck');
@@ -57,7 +57,7 @@ class hasil_panen extends CI_Controller
          $hasil = $this->input->post('hasil');
          $tahun = $this->input->post('tahun');
          $data = array(
-            'id_kelurahan' => $idKelurahan,
+            'id_desa' => $idDesa,
             'nama' => $nama,
             'id_jenis' => $jenis_tanaman,
             'hasil' => $hasil,
@@ -65,10 +65,10 @@ class hasil_panen extends CI_Controller
          );
          $this->admin->insertHasil($data);
          $this->session->set_flashdata('err-hasil', '<div class="mt-3 alert alert-success alert-dismissible fade show" role="alert"> Input Data Berhasil !</div>');
-         redirect('admin/hasil_panen/data/' . $idKelurahan);
+         redirect('admin/hasil_panen/data/' . $idDesa);
       } else {
          $this->session->set_flashdata('err-hasil', '<div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">Input data gagal, Silahkan coba lagi !</div>');
-         redirect('admin/hasil_panen/data/' . $idKelurahan);
+         redirect('admin/hasil_panen/data/' . $idDesa);
       }
    }
 
@@ -78,7 +78,7 @@ class hasil_panen extends CI_Controller
       $this->form_validation->set_rules('jenis_tanaman', 'Jenis Tanaman', 'callback_dropdownCheck');
       $this->form_validation->set_rules('hasil', 'Hasil', 'required');
       $this->form_validation->set_rules('tahun', 'Tahun', 'required');
-      $idKelurahan = $this->admin->getHasilByIdRow($id)->id_kelurahan;
+      $idDesa = $this->admin->getHasilByIdRow($id)->id_desa;
 
       if ($this->form_validation->run()) {
          $nama = $this->input->post('nama');
@@ -86,7 +86,7 @@ class hasil_panen extends CI_Controller
          $hasil = $this->input->post('hasil');
          $tahun = $this->input->post('tahun');
          $data = array(
-            'id_kelurahan' => $idKelurahan,
+            'id_desa' => $idDesa,
             'nama' => $nama,
             'id_jenis' => $jenis_tanaman,
             'hasil' => $hasil,
@@ -94,18 +94,18 @@ class hasil_panen extends CI_Controller
          );
          $this->admin->updateHasil($id, $data);
          $this->session->set_flashdata('err-hasil', '<div class="mt-3 alert alert-success alert-dismissible fade show" role="alert"> Input Data Berhasil !</div>');
-         redirect('admin/hasil_panen/data/' . $idKelurahan);
+         redirect('admin/hasil_panen/data/' . $idDesa);
       } else {
          $this->session->set_flashdata('err-hasil', '<div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">Input data gagal, Silahkan coba lagi !</div>');
-         redirect('admin/hasil_panen/data/' . $idKelurahan);
+         redirect('admin/hasil_panen/data/' . $idDesa);
       }
    }
 
    public function deleteHasil($id)
    {
-      $idKelurahan = $this->admin->getHasilByIdRow($id)->id_kelurahan;
+      $idDesa = $this->admin->getHasilByIdRow($id)->id_desa;
       $this->admin->deleteHasil($id);
-      redirect('admin/hasil_panen/data/' . $idKelurahan);
+      redirect('admin/hasil_panen/data/' . $idDesa);
    }
 
    public function dropdownCheck($str)
