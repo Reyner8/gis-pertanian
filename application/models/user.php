@@ -7,7 +7,7 @@ class user extends CI_Model
    {
       // notes: dataColumns = nama sayur buah dll
       $result = [];
-      $lokasi = $this->db->query("SELECT kelurahan.*, kecamatan.nama AS namaKecamatan FROM kelurahan INNER JOIN kecamatan ON kecamatan.id = kelurahan.id_kecamatan")->result();
+      $lokasi = $this->db->query("SELECT desa.*, kecamatan.nama AS namaKecamatan FROM desa INNER JOIN kecamatan ON kecamatan.id = desa.id_kecamatan")->result();
 
       foreach ($lokasi as $lokasi) {
          $FinalDataRows = [];
@@ -40,8 +40,8 @@ class user extends CI_Model
          }
 
          array_push($result, [
-            'idKelurahan' => $lokasi->id,
-            'namaKelurahan' => $lokasi->nama,
+            'idDesa' => $lokasi->id,
+            'namaDesa' => $lokasi->nama,
             'lat' => $lokasi->lat,
             'lng' => $lokasi->lng,
             'icon' => $lokasi->icon,
@@ -59,29 +59,29 @@ class user extends CI_Model
 
    private function dataRows($lokasiID)
    {
-      return $this->db->query("SELECT kelurahan.id AS idKelurahan, jenis_tanaman.id AS idJenis ,jenis_tanaman.nama AS namaTanaman, SUM(hasil_panen.hasil) AS totalHasil, hasil_panen.tahun
-      FROM kelurahan
-      INNER JOIN hasil_panen ON kelurahan.id = hasil_panen.id_kelurahan 
+      return $this->db->query("SELECT desa.id AS idDesa, jenis_tanaman.id AS idJenis ,jenis_tanaman.nama AS namaTanaman, SUM(hasil_panen.hasil) AS totalHasil, hasil_panen.tahun
+      FROM desa
+      INNER JOIN hasil_panen ON desa.id = hasil_panen.id_desa 
       INNER JOIN jenis_tanaman ON hasil_panen.id_jenis = jenis_tanaman.id
-      WHERE kelurahan.id = '$lokasiID' AND YEAR(hasil_panen.tahun) = YEAR(CURDATE())
-      GROUP BY kelurahan.id, hasil_panen.tahun, jenis_tanaman.id")->result();
+      WHERE desa.id = '$lokasiID' AND YEAR(hasil_panen.tahun) = YEAR(CURDATE())
+      GROUP BY desa.id, hasil_panen.tahun, jenis_tanaman.id")->result();
    }
 
    private function dataTahun($lokasiID)
    {
       return $this->db->query("SELECT hasil_panen.tahun, hasil_panen.id_jenis
       FROM hasil_panen
-      INNER JOIN kelurahan ON kelurahan.id = hasil_panen.id_kelurahan
-      WHERE kelurahan.id = '$lokasiID' AND YEAR(hasil_panen.tahun) = YEAR(CURDATE())
+      INNER JOIN desa ON desa.id = hasil_panen.id_desa
+      WHERE desa.id = '$lokasiID' AND YEAR(hasil_panen.tahun) = YEAR(CURDATE())
       GROUP BY hasil_panen.tahun")->result();
    }
 
-   public function getHasilByIdKelurahan($id)
+   public function getHasilByIdDesa($id)
    {
       return $this->db->query("SELECT hasil_panen.*, kelompok_tani.nama AS namaKelompok FROM hasil_panen
       INNER JOIN kelompok_tani ON kelompok_tani.id = hasil_panen.id_kelompok
-      INNER JOIN kelurahan ON kelurahan.id = kelompok_tani.id_kelurahan
-      WHERE kelurahan.id = '$id' ORDER BY hasil_panen.tahun DESC")->result();
+      INNER JOIN desa ON desa.id = kelompok_tani.id_desa
+      WHERE desa.id = '$id' ORDER BY hasil_panen.tahun DESC")->result();
    }
 
 
@@ -93,22 +93,22 @@ class user extends CI_Model
    //
 
 
-   public function getHasilSumPerKelurahan($idKecamatan = 0)
+   public function getHasilSumPerDesa($idKecamatan = 0)
    {
       $data = [];
       if ($idKecamatan == 0) {
-         $kelurahan = $this->db->query("SELECT * FROM kelurahan")->result();
+         $desa = $this->db->query("SELECT * FROM desa")->result();
       } else {
-         $kelurahan = $this->db->query("SELECT * FROM kelurahan WHERE id_kecamatan = '$idKecamatan'")->result();
+         $desa = $this->db->query("SELECT * FROM desa WHERE id_kecamatan = '$idKecamatan'")->result();
       }
       $jenisTanaman = $this->db->query("SELECT * FROM jenis_tanaman")->result();
-      foreach ($kelurahan as $k) {
+      foreach ($desa as $k) {
          $tempData = [];
          array_push($tempData, $k->nama);
 
          foreach ($jenisTanaman as $jt) {
             $resultSum = 0;
-            foreach ($this->hasilByIdKelurahan($k->id) as $hasil) {
+            foreach ($this->hasilByIdDesa($k->id) as $hasil) {
                if ($jt->id == $hasil->id_jenis) {
                   $resultSum += $hasil->hasil;
                }
@@ -120,12 +120,12 @@ class user extends CI_Model
       return $data;
    }
 
-   private function hasilByIdKelurahan($id)
+   private function hasilByIdDesa($id)
    {
-      return $this->db->query("SELECT * FROM hasil_panen WHERE hasil_panen.id_kelurahan = '$id'")->result();
+      return $this->db->query("SELECT * FROM hasil_panen WHERE hasil_panen.id_desa = '$id'")->result();
    }
 
-   public function getKelurahanByKecamatan($id)
+   public function getDesaByKecamatan($id)
    {
       return;
    }
@@ -134,9 +134,9 @@ class user extends CI_Model
 
    public function getHasil()
    {
-      return $this->db->query("SELECT hasil_panen.*, jenis_tanaman.nama AS namaJenis, kelurahan.id AS idKelurahan
+      return $this->db->query("SELECT hasil_panen.*, jenis_tanaman.nama AS namaJenis, desa.id AS idDesa
       FROM hasil_panen
-      INNER JOIN kelurahan ON kelurahan.id = hasil_panen.id_kelurahan
+      INNER JOIN desa ON desa.id = hasil_panen.id_desa
       INNER JOIN jenis_tanaman ON jenis_tanaman.id = hasil_panen.id_jenis
       ORDER BY hasil_panen.tahun DESC")->result();
    }
@@ -146,12 +146,12 @@ class user extends CI_Model
       return $this->db->query("SELECT * FROM about")->row();
    }
 
-   public function getKelurahan($idKecamatan = null)
+   public function getDesa($idKecamatan = null)
    {
       if ($idKecamatan == null) {
-         return $this->db->query("SELECT kelurahan.*, kecamatan.nama AS namaKecamatan FROM kelurahan JOIN kecamatan ON kecamatan.id = kelurahan.id_kecamatan")->result();
+         return $this->db->query("SELECT desa.*, kecamatan.nama AS namaKecamatan FROM desa JOIN kecamatan ON kecamatan.id = desa.id_kecamatan")->result();
       } else {
-         return $this->db->query("SELECT kelurahan.*, kecamatan.nama AS namaKecamatan FROM kelurahan JOIN kecamatan ON kecamatan.id = kelurahan.id_kecamatan WHERE kelurahan.id_kecamatan = '$idKecamatan'")->result();
+         return $this->db->query("SELECT desa.*, kecamatan.nama AS namaKecamatan FROM desa JOIN kecamatan ON kecamatan.id = desa.id_kecamatan WHERE desa.id_kecamatan = '$idKecamatan'")->result();
       }
    }
 
@@ -160,9 +160,9 @@ class user extends CI_Model
       return $this->db->query("SELECT * FROM kecamatan")->result();
    }
 
-   public function getKelurahanById($id)
+   public function getDesaById($id)
    {
-      return $this->db->query("SELECT kelurahan.*, kecamatan.nama AS namaKecamatan FROM kelurahan,kecamatan WHERE kecamatan.id = kelurahan.id_kecamatan AND kelurahan.id = '$id'")->row();
+      return $this->db->query("SELECT desa.*, kecamatan.nama AS namaKecamatan FROM desa,kecamatan WHERE kecamatan.id = desa.id_kecamatan AND desa.id = '$id'")->row();
    }
 
    public function insert($data)

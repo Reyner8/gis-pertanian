@@ -13,9 +13,9 @@ class hasil_pertanian extends CI_Controller
     {
         $data = [
             'title' => 'Hasil Pertanian',
-            'hasilSum' => $this->user->getHasilSumPerKelurahan(),
+            'hasilSum' => $this->user->getHasilSumPerDesa(),
             'hasil' => $this->user->getHasil(),
-            'kelurahan' => $this->user->getKelurahan(),
+            'desa' => $this->user->getDesa(),
             'jenisTanaman' => $this->user->getJenisTanaman(),
             'kecamatan' => $this->user->getKecamatan(),
             'isSearch' => false,
@@ -30,7 +30,7 @@ class hasil_pertanian extends CI_Controller
 
         $data = [
             'title' => 'Hasil Pertanian',
-            'hasilSum' => $this->user->getHasilSumPerKelurahan($idKecamatan),
+            'hasilSum' => $this->user->getHasilSumPerDesa($idKecamatan),
             'hasil' => $this->user->getHasil(),
             'desa' => $this->user->getDesa($idKecamatan),
             'jenisTanaman' => $this->user->getJenisTanaman(),

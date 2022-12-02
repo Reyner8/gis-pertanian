@@ -74,12 +74,12 @@
 </main>
 
 <!-- Modal -->
-<?php foreach ($desa as $kel) : ?>
-   <div class="modal fade bd-example-modal-lg" id="ModalDetail<?= str_replace(' ', '_', $kel->nama)  ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<?php foreach ($desa as $d) : ?>
+   <div class="modal fade bd-example-modal-lg" id="ModalDetail<?= str_replace(' ', '_', $d->nama)  ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
             <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLongTitle">Hasil Panen Desa <?= $kel->nama ?></h5>
+               <h5 class="modal-title" id="exampleModalLongTitle">Hasil Panen Desa <?= $d->nama ?></h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                </button>
@@ -97,7 +97,7 @@
                   <tbody>
                      <?php foreach ($hasil as $h) : ?>
 
-                        <?php if ($h->idDesa == $kel->id) : ?>
+                        <?php if ($h->idDesa == $d->id) : ?>
                            <tr>
                               <td><?= $h->nama ?></td>
                               <td><?= $h->namaJenis ?></td>
